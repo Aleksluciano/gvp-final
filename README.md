@@ -1,10 +1,31 @@
-# Gvp101
+# Sistema GVP
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.1.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+Run `ng startserver` to start the backend server.
+
+## Create the following files
+
+in /src/environments/
+
+environment.ts like below
+
+export const environment = {
+  production: false,
+  apiUrl: "http://localhost:3000/api"
+};
+
+environment.prod.ts like below
+
+export const environment = {
+  production: true,
+  apiUrl: "https://yoursite/api"
+};
+
 
 ## Code scaffolding
 
