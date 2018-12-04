@@ -9,17 +9,25 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 Run `ng startserver` to start the backend server.
 
 ## Create the following files
+in main path create a nodemon.json file as follow:
 
-in /src/environments/
+{
+  "env": {
+    "USER_DATABASE": "youruserinmlab",
+    "PASS_DATABASE": "yourpasswordinmlab"
+  }
+}
 
-environment.ts like below
+in path /src/environments/
+
+create a file environment.ts as follow:
 
 export const environment = {
   production: false,
   apiUrl: "http://localhost:3000/api"
 };
 
-environment.prod.ts like below
+create a file environment.prod.ts as follow:
 
 export const environment = {
   production: true,
