@@ -1,0 +1,49 @@
+<nav class="navbar navbar-expand-md navbar-dark mb-4" id="mainNavBar">
+  <div class="container">
+
+      <a id="Header" routerLink="/" routerLinkActive="router-link-active"  class="navbar-brand">
+        <i class="fa fa-home"> </i> <strong> Home</strong></a>
+    <button class="navbar-toggler" type="button"  aria-controls="appNavigation" [attr.aria-expanded]="!isCollapsed" (click)="toggleMenu()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse"  id="appNavigation" [ngbCollapse]="isCollapsed" >
+
+      <ul class="navbar-nav mr-auto" >
+          <!-- <li class="nav-item">
+              <a routerLink="/"  class="nav-link" (click)="toggleMenu()">Início</a>
+            </li> -->
+        <!-- <li class="nav-item">
+          <a routerLink="/users"  class="nav-link" (click)="toggleMenu()">GVP's</a>
+        </li> -->
+        <li class="nav-item">
+          <a routerLink="/congregations"  class="nav-link" (click)="toggleMenu()">Congregações</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/hospitals"  class="nav-link" (click)="toggleMenu()">Hospitais</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/accommodations"  class="nav-link" (click)="toggleMenu()">Hospedagem</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/assistants"  class="nav-link" (click)="toggleMenu()">Assistentes Sociais</a>
+        </li>
+        <!-- <li class="nav-item">
+            <a routerLink="/patients"  class="nav-link" (click)="toggleMenu()">Pacientes</a>
+          </li> -->
+    </ul>
+    <ul class="navbar-nav ml-auto" >
+      <!-- <li class="nav-item">
+          <a routerLink="/"  class="nav-link" (click)="toggleMenu()">Início</a>
+        </li> -->
+    <!-- <li class="nav-item">
+      <a routerLink="/users"  class="nav-link" (click)="toggleMenu()">GVP's</a>
+    </li> -->
+    <li class="nav-item">
+      <a routerLink="/logout"  class="nav-link" (click)="toggleMenu()">Sair</a>
+    </li>
+  </ul>
+    </div>
+  </div>
+</nav>
+

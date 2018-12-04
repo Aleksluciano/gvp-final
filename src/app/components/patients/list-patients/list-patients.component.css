@@ -1,0 +1,49 @@
+.fa-trash{
+  color: red;
+}
+
+.fa-edit{
+  background-color: orange;
+}
+
+.fa-eye{
+  background-color: lightblue;
+}
+
+
+#actions{
+  text-align: center;
+}
+
+
+tr:hover {
+  background-color: lightgoldenrodyellow;
+}
+
+::placeholder{
+  opacity: 0.5;
+}
+
+thead{
+  background-color: rgb(252, 249, 97);
+
+}
+
+
+
+td{
+  word-break:break-all
+}
+
+
+@media screen and (max-width: 480px) {
+  .colhide{
+    display: none;
+  }
+}
+
+
+
+
+
+

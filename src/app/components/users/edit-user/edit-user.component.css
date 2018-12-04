@@ -1,0 +1,38 @@
+label {
+  color: steelblue;
+  font-size: 15px;
+}
+
+
+
+.radio-inline{
+  color: black;
+}
+
+.card-body{
+  background-color: gainsboro;
+}
+
+
+.btn-primary {
+  color: #ffffff;
+  background-color: steelblue;
+  border-color: #130269;
+}
+
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited,
+.btn-primary:focus {
+  color: #ffffff;
+  background-color: royalblue !important;
+  border-color: #130269;
+}
+
+::placeholder{
+  opacity: 0.5;
+}
+
+
+

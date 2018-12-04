@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-md-6">
+    <a [routerLink]="" (click)=onBackClicked() class="btn btn-link">
+      <i class="fa fa-arrow-circle-o-left"></i> Voltar
+    </a>
+  </div>
+  <div class="col md-6">
+    <div class="btn-group pull-right">
+      <a routerLink="/patients/edit/{{ id }}" class="btn btn-warning">
+        Editar
+      </a>
+      <button (click)="onDeleteClick()" class="btn btn-danger">Deletar</button>
+    </div>
+  </div>
+</div>
+<hr>
+<div *ngIf="patient" class="card" @fade>
+  <h3 class="card-header">Paciente: {{ patient.firstName }} {{ patient.lastName }}</h3>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12 col-sm-6">
+        <h4> ID: {{ patient.id }}</h4>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <ul class="list-group col-md-4">
+        <li class="list-group-item"><strong class="Topic">Email:</strong> {{ patient.email }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ patient.mobilePhone }}</li>
+        <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ patient.phone }}</li>
+        <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ patient.congregation }}</li>
+        <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ patient.address }}, {{ patient.numeral }}
+          {{ patient.complement }} - {{ patient.neighborhood }} - {{ patient.city }} - {{ patient.state }}</li>
+        <li class="list-group-item">
+        <a [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
+        <strong class="Topic">Hospital:</strong></a> {{ hospital?.name }}
+        <div *ngIf="showDetailsHospital"> Endereço: {{ hospital.address }}, {{ hospital.numeral }}
+          {{ hospital.complement }} - {{ hospital.neighborhood }} - {{ hospital.city }} - {{ hospital.state }}
+        </div>
+        </li>
+      </ul>
+      <ul class="list-group col-md-4">
+        <li class="list-group-item"><strong class="Topic">Data de internação:</strong> {{ patient.hospitalizationDate |
+          date:'dd-MM-yyyy'}}</li>
+        <li class="list-group-item"><strong class="Topic">Data de alta médica:</strong> {{ patient.medicalRelease |
+          date:'dd-MM-yyyy' }}</li>
+        <li class="list-group-item">
+            <a [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation ">
+              <strong class="Topic">Hospedagem:</strong></a> {{ accommodation?.name }}
+              <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation.address }}, {{ accommodation.numeral }}
+                {{ accommodation.complement }} - {{ accommodation.neighborhood }} - {{ accommodation.city }} - {{ accommodation.state }}
+              </div>
+            </li>
+        <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong> {{ patient.mobileElder1 }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong> {{ patient.mobileElder2 }}</li>
+        <li class="list-group-item"><strong class="Topic">Telefone Ancião 1:</strong> {{ patient.phoneElder1 }}</li>
+      </ul>
+    <ul class="list-group col-md-4">
+      <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong> {{ patient.phoneElder2 }}</li>
+    </ul>
+      <!-- <ul class="list-group col-md-4">
+        <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ patient.neighborhood }}</li>
+        <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ patient.address }}</li>
+        <li class="list-group-item"><strong class="Topic">Número:</strong> {{ patient.numeral }}</li>
+        <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ patient.complement }}</li>
+        <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ patient.cep }}</li>
+      </ul> -->
+
+    </div>
+  </div>
+</div>
+<div *ngIf="patient" class="card" @fade>
+  <h4 class="card-header">Descrição do caso</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="container" id="divEditor">
+
+        <angular-editor id="myEditor" name="caseDescription" [(ngModel)]="patient.caseDescription" [config]="config"></angular-editor>
+        <br>
+      </div>
+
+    </div>
+  </div>
+</div>
