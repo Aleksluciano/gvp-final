@@ -1,3 +1,7 @@
+<div *ngIf="!isLoaded">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="isLoaded">
 <div class="row">
     <div class="col-md-10">
       <h2><i class="fa fa-bed"></i> Pacientes</h2>
@@ -30,9 +34,9 @@
       </div>
   </div>
 
-  <div class="row">
+  <div class="row" @fade>
       <div class="col-md-10">
-      <table *ngIf="patients?.length > 0;else noPatients" class="table" id="patientTable">
+      <table *ngIf="(patients?.length > 0 && isLoaded == true);else noPatients" class="table" id="patientTable">
         <thead class="thead">
           <tr>
             <th >Nome</th>
@@ -42,11 +46,11 @@
             <th  colspan="3" id="actions">Ações</th>
           </tr>
         </thead>
-        <tbody @fade>
+        <tbody>
           <tr  *ngFor="let patient of  patients | filter: filteredName : 'firstName' : 'lastName' | filter: filteredEmail: 'email'">
             <td ><a routerLink="{{ patient.id }}">{{ patient.firstName }} {{ patient.lastName }}</a></td>
             <td class="colhide">{{ patient.email }}</td>
-            <td class="colhide">{{ patient.mobilePhone }}</td>
+            <td class="colhide">{{ patient.mobilePhone | mask:"(00) 00000-0000"}}</td>
             <td class="colhide">{{ patient.congregation }}</td>
           <td ><button id="eyeButton" routerLink="{{ patient.id }}"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
           <td ><button id="editButton" routerLink="edit/{{ patient.id }}"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
@@ -59,10 +63,15 @@
       </table>
 
     </div>
-  </div>
 
 
-  <ng-template #noPatients>
-    <hr>
-    <h5>Não existem pacientes cadastrados no sistema</h5>
-  </ng-template>
+
+
+</div>
+
+<ng-template #noPatients>
+  <hr>
+  <h5>Não existem pacientes cadastrados no sistema</h5>
+</ng-template>
+</div>
+

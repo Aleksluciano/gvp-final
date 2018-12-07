@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AddAssistantComponent } from "./add-assistant/add-assistant.component";
 import { FilterModule } from 'src/app/pipes/filter.module';
 import { AssistantsRoutingModule } from './assistants-routing.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AssistantsRoutingModule } from './assistants-routing.module';
     FormsModule,
     AssistantsRoutingModule,
     FilterModule,
-    NgxViacepModule
+    NgxViacepModule,
+    NgxMaskModule.forRoot(),
   ]
 })
 export class AssistantsModule { }

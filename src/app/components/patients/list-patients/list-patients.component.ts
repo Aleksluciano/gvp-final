@@ -18,7 +18,7 @@ import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.compone
     trigger('fade',[
       transition('void => *',[
         style({ opacity: 0}),
-        animate(500)
+        animate(1000)
       ]),
     ]),
       ]
@@ -28,6 +28,8 @@ export class ListPatientsComponent implements OnInit, OnDestroy {
   patients: Patient[] = [];
   filteredName: string = '';
   filteredEmail: string = '';
+
+  isLoaded: boolean = false;
 
   constructor(
     private patientsService: PatientsService,
@@ -39,11 +41,13 @@ export class ListPatientsComponent implements OnInit, OnDestroy {
 
      this.patients = this.patientsService.Patients;
     if (this.patients.length <= 0)this.patientsService.getPatientsServer();
+    else this.isLoaded = true;
 
     this.patientsSub = this.patientsService
       .getPatientsUpdateListener()
       .subscribe( patientsData  => {
        this.patients = patientsData
+       this.isLoaded = true;
 
       });
 

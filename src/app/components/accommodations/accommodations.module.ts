@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AddAccommodationComponent } from "./add-accommodation/add-accommodation.component";
 import { FilterModule } from 'src/app/pipes/filter.module';
 import { AccommodationsRoutingModule } from './accommodations-routing.module';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AccommodationsRoutingModule } from './accommodations-routing.module';
     FormsModule,
     AccommodationsRoutingModule,
     FilterModule,
-    NgxViacepModule
+    NgxViacepModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class AccommodationsModule { }

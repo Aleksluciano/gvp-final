@@ -14,7 +14,6 @@ import { PatientsService } from "../patients.service";
 import { Subscription } from "rxjs";
 import { CongregationsService } from "../../congregations/congregations.service";
 import { InfoModalComponent } from "../../info-modal/info-modal.component";
-import { MaskPhones } from "src/app/mask/phone-mask";
 import { Hospital } from "../../hospitals/hospital.model";
 import { Accommodation } from "../../accommodations/accommodation.model";
 import { HospitalsService } from "../../hospitals/hospitals.service";
@@ -26,14 +25,14 @@ import { AccommodationsService } from "../../accommodations/accommodations.servi
   styleUrls: ["./edit-patient.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
 export class EditPatientComponent implements OnInit, OnDestroy {
   id: string;
   patientSub: Subscription;
-  maskPhones: MaskPhones;
+
 
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
@@ -115,11 +114,6 @@ export class EditPatientComponent implements OnInit, OnDestroy {
     }
 
     this.patientSub = this.patientsService.getOnePatientUpdateListener().subscribe((patient) => this.patient = patient)
-
-
-    this.maskPhones = new MaskPhones(this.patient);
-
-
 
     this.congregations = this.congregationsService.Congregations;
 

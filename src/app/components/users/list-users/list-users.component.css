@@ -39,3 +39,11 @@ td{
     display: none;
   }
 }
+
+mat-spinner{
+  margin: auto;
+}
+
+.linkClass{
+  color:black;
+}

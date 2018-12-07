@@ -12,7 +12,7 @@ import { PatientsService } from '../patients/patients.service';
   styleUrls: ['./begin.component.css'],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
@@ -25,6 +25,8 @@ export class BeginComponent implements OnInit {
     countPatient: 0,
     countReport: 0
   }
+
+  isLoaded: boolean = false;
 
   constructor(
     private beginService: BeginService,
@@ -43,14 +45,16 @@ export class BeginComponent implements OnInit {
     this.totalObjects.countPatient = this.patientsService.Patients.length;
     }
 
-    if (this.totalObjects.countUser == 0) {
+
+    if (this.totalObjects.countPatient <= 0 || this.totalObjects.countUser <= 0) {
       this.beginService.countObjectsServer();
-    }
+    }else this.isLoaded = true;
 
     this.objectsSub = this.beginService
       .getCountListener()
       .subscribe(objectsData => {
         this.totalObjects = objectsData;
+        this.isLoaded = true;
       });
   }
 

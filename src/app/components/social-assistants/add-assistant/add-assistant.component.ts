@@ -12,7 +12,6 @@ import { Subscription } from "rxjs";
 import { MatDialogConfig, MatDialog } from "@angular/material";
 
 import { ConfirmModalComponent } from "../../confirm-modal/confirm-modal.component";
-import { MaskPhones } from './../../../mask/phone-mask';
 import { Hospital } from './../../hospitals/hospital.model';
 import { HospitalsService } from './../../hospitals/hospitals.service';
 
@@ -22,7 +21,7 @@ import { HospitalsService } from './../../hospitals/hospitals.service';
   styleUrls: ["./add-assistant.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
@@ -35,7 +34,6 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
   isNew: boolean = true;
   textInput = "Criar";
   filteredName: string = "";
-  maskPhones: MaskPhones;
 
   hospitals: Hospital[] = [];
   hospital: Hospital = {
@@ -71,7 +69,7 @@ export class AddAssistantComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.assistant = this.clearModel();
-    this.maskPhones = new MaskPhones(this.assistant);
+
     this.assistants = this.assistantsService.Assistants;
 
     if (this.assistants.length <= 0)

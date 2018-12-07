@@ -26,16 +26,19 @@
     <div class="row">
       <ul class="list-group col-md-4">
         <li class="list-group-item"><strong class="Topic">Email:</strong> {{ patient.email }}</li>
-        <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ patient.mobilePhone }}</li>
-        <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ patient.phone }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular:</strong><a class="linkClass" href="tel:{{ patient.mobilePhone }}"> {{ patient.mobilePhone | mask:"(00) 00000-0000" }}</a></li>
+        <li class="list-group-item"><strong class="Topic">Telefone:</strong><a class="linkClass" href="tel:{{ patient.phone }}"> {{ patient.phone | mask:"(00) 0000-0000" }}</a></li>
         <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ patient.congregation }}</li>
         <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ patient.address }}, {{ patient.numeral }}
           {{ patient.complement }} - {{ patient.neighborhood }} - {{ patient.city }} - {{ patient.state }}</li>
         <li class="list-group-item">
-        <a [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
-        <strong class="Topic">Hospital:</strong></a> {{ hospital?.name }}
-        <div *ngIf="showDetailsHospital"> Endereço: {{ hospital.address }}, {{ hospital.numeral }}
-          {{ hospital.complement }} - {{ hospital.neighborhood }} - {{ hospital.city }} - {{ hospital.state }}
+        <strong class="Topic">Hospital:</strong>
+        <a class="linkClass" [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
+          <div *ngIf="showDetailsHospital">{{ hospital?.name }}( - )</div>
+          <div *ngIf="!showDetailsHospital">{{ hospital?.name }}(+)</div>
+        </a>
+        <div *ngIf="showDetailsHospital"> Endereço: {{ hospital?.address }}, {{ hospital?.numeral }}
+          {{ hospital?.complement }} - {{ hospital?.neighborhood }} - {{ hospital?.city }} - {{ hospital?.state }}
         </div>
         </li>
       </ul>
@@ -45,18 +48,18 @@
         <li class="list-group-item"><strong class="Topic">Data de alta médica:</strong> {{ patient.medicalRelease |
           date:'dd-MM-yyyy' }}</li>
         <li class="list-group-item">
-            <a [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation ">
-              <strong class="Topic">Hospedagem:</strong></a> {{ accommodation?.name }}
+              <strong class="Topic">Hospedagem:</strong>
+              <a class="linkClass" [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation"> {{ accommodation?.name }}</a>
               <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation.address }}, {{ accommodation.numeral }}
                 {{ accommodation.complement }} - {{ accommodation.neighborhood }} - {{ accommodation.city }} - {{ accommodation.state }}
               </div>
             </li>
-        <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong> {{ patient.mobileElder1 }}</li>
-        <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong> {{ patient.mobileElder2 }}</li>
-        <li class="list-group-item"><strong class="Topic">Telefone Ancião 1:</strong> {{ patient.phoneElder1 }}</li>
+        <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong><a class="linkClass" href="tel:{{ patient.mobileElder1 }}"> {{ patient.mobileElder1 | mask:"(00) 00000-0000" }}</a></li>
+        <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong><a class="linkClass" href="tel:{{ patient.mobileElder2 }}"> {{ patient.mobileElder2 | mask:"(00) 00000-0000" }}</a></li>
+        <li class="list-group-item"><strong class="Topic">Telefone Ancião 1:</strong><a class="linkClass" href="tel:{{ patient.phoneElder1 }}"> {{ patient.phoneElder1 | mask:"(00) 0000-0000" }}</a></li>
       </ul>
     <ul class="list-group col-md-4">
-      <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong> {{ patient.phoneElder2 }}</li>
+      <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong><a class="linkClass" href="tel:{{ patient.phoneElder2 }}"> {{ patient.phoneElder2  | mask:"(00) 0000-0000"}}</a></li>
     </ul>
       <!-- <ul class="list-group col-md-4">
         <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ patient.neighborhood }}</li>

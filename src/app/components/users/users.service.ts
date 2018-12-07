@@ -64,6 +64,7 @@ export class UsersService {
           cssClass: 'alert-success', timeout: 4000
         });
         this.usersUpdated.next([...this.users]);
+        this.router.navigate(['/users']);
 
       });
   }
@@ -172,6 +173,7 @@ export class UsersService {
         cssClass: 'alert-success', timeout: 4000
       });
       this.usersUpdated.next([...this.users]);
+      this.router.navigate(['/users']);
       //this.warnFlashMessage.next();
     })
   }
@@ -193,7 +195,7 @@ export class UsersService {
         cssClass: "alert-success",
         timeout: 4000
       });
-      this.router.navigate(['/']);
+      this.router.navigate(['/users']);
     // this.warnFlashMessage.next();
   });
 }

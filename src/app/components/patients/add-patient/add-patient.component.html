@@ -28,15 +28,14 @@
               #firstNameRef
               name="firstName"
               #firstNameModel="ngModel"
-              [ngClass]="{'is-invalid':firstNameModel.errors && firstNameModel.touched}"
+              [ngClass]="{'is-invalid':( firstNameModel.errors && firstNameModel.touched ) || ( firstNameModel.errors && hasError )}"
               [ngModel]="patient.firstName"
               (ngModelChange)="patient.firstName = $event"
               minlength="3"
-              autofocus
               required>
 
               <div [hidden]="!firstNameModel.errors?.required" class="invalid-feedback">
-                Nome requerido
+                Campo obrigatório
               </div>
 
               <div [hidden]="!firstNameModel.errors?.minlength" class="invalid-feedback">
@@ -53,14 +52,14 @@
               class="form-control"
               name="lastName"
               #lastNameModel="ngModel"
-              [ngClass]="{'is-invalid':lastNameModel.errors && lastNameModel.touched}"
+              [ngClass]="{'is-invalid':( lastNameModel.errors && lastNameModel.touched ) || ( lastNameModel.errors && hasError )}"
               [ngModel]="patient.lastName"
               (ngModelChange)="patient.lastName = $event"
               minlength="2"
               required>
 
               <div [hidden]="!lastNameModel.errors?.required" class="invalid-feedback">
-                Sobrenome requerido
+                Campo obrigatório
               </div>
 
               <div [hidden]="!lastNameModel.errors?.minlength" class="invalid-feedback">
@@ -83,13 +82,16 @@
                     class="form-control"
                     name="mobilePhone"
                     #mobilePhoneModel="ngModel"
-                    [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
+                    [ngClass]="{'is-invalid': mobilePhoneModel.errors && mobilePhoneModel.touched }"
                     [(ngModel)]="patient.mobilePhone"
-                    (keypress)="maskPhones.onKeyPressMobilePhone($event)"
-                    minlength="15"
-                    maxlength="15"
+                    minlength="11"
                     placeholder="Ex.: (00) 00000-0000"
+                    mask="(00) 00000-0000"
                     >
+
+                     <!-- <div [hidden]="!mobilePhoneModel.errors?.required" class="invalid-feedback">
+                        Campo obrigatório
+                      </div> -->
 
                     <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
                         Formato incorreto
@@ -108,10 +110,9 @@
                       #phoneModel="ngModel"
                       [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
                       [(ngModel)]="patient.phone"
-                      (keypress)="maskPhones.onKeyPressPhone($event)"
-                      minlength="14"
-                      maxlength="14"
+                      minlength="10"
                       placeholder="Ex.: (00) 0000-0000"
+                      mask="(00) 0000-0000"
                       >
 
                       <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
@@ -159,84 +160,105 @@
 
               <div class="col-md-2">
                    <div class="form-group">
-                       <label for="state">Estado</label>
+                       <label for="state">Estado *</label>
                        <input
                        type="text"
                        class="form-control"
                        name="state"
                        #stateModel="ngModel"
-                       [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
+                       [ngClass]="{'is-invalid':( stateModel.errors && stateModel.touched ) || ( stateModel.errors && hasError )}"
                        [(ngModel)]="patient.state"
                        maxlength="2"
-
+                       required
                        >
+
+                       <div [hidden]="!stateModel.errors?.required" class="invalid-feedback">
+                        Campo obrigatório
+                      </div>
 
                      </div>
                   </div>
 
                   <div class="col-md-3">
                       <div class="form-group">
-                          <label for="city">Cidade</label>
+                          <label for="city">Cidade *</label>
                           <input
                           type="text"
                           class="form-control"
                           name="city"
                           #cityModel="ngModel"
-                          [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
+                          [ngClass]="{'is-invalid':( cityModel.errors && cityModel.touched ) || ( cityModel.errors && hasError )}"
                           [(ngModel)]="patient.city"
-
+                          required
                           >
-
+                          <div [hidden]="!cityModel.errors?.required" class="invalid-feedback">
+                            Campo obrigatório
+                          </div>
                         </div>
                      </div>
 
                      <div class="col-md-3">
                         <div class="form-group">
-                            <label for="neighborhood">Bairro</label>
+                            <label for="neighborhood">Bairro *</label>
                             <input
                             type="text"
                             class="form-control"
                             name="neighborhood"
                             #neighborhoodModel="ngModel"
-                            [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
+                            [ngClass]="{'is-invalid':( neighborhoodModel.errors && neighborhoodModel.touched ) || ( neighborhoodModel.errors && hasError )}"
                             [(ngModel)]="patient.neighborhood"
+                            required
                             >
+
+                            <div [hidden]="!neighborhoodModel.errors?.required" class="invalid-feedback">
+                              Campo obrigatório
+                            </div>
 
                           </div>
                        </div>
 
                        <div class="col-md-4">
                           <div class="form-group">
-                              <label for="address">Logradouro (Rua, Avenida, etc)</label>
+                              <label for="address">Logradouro (Rua, Avenida, etc) *</label>
                               <input
                               type="text"
                               class="form-control"
                               name="address"
                               #addressModel="ngModel"
-                              [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
+                              [ngClass]="{'is-invalid':( addressModel.errors && addressModel.touched ) || ( addressModel.errors && hasError )}"
                               [(ngModel)]="patient.address"
+                              required
                               >
+
+                              <div [hidden]="!addressModel.errors?.required" class="invalid-feedback">
+                                Campo obrigatório
+                              </div>
 
                             </div>
                          </div>
 
                          <div class="col-md-2">
                           <div class="form-group">
-                              <label for="numeral">Número</label>
+                              <label for="numeral">Número *</label>
                               <input
                               type="number"
                               class="form-control"
                               name="numeral"
                               #numeralModel="ngModel"
-                              [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
+                              [ngClass]="{'is-invalid':( numeralModel.errors && numeralModel.touched ) || ( numeralModel.errors && hasError )}"
                               [(ngModel)]="patient.numeral"
+                              required
                               >
+
+                              <div [hidden]="!numeralModel.errors?.required" class="invalid-feedback">
+                                Campo obrigatório
+                              </div>
 
                             </div>
                          </div>
                          <div class="col-md-3">
                           <div class="form-group">
-                              <label for="numeral">Complemento</label>
+                              <label for="complement">Complemento</label>
                               <input
                               type="text"
                               class="form-control"
@@ -267,15 +289,15 @@
               <div class="form-group" class="col-md-3" id="sel">
 
                   <label for="congregation">Congregação *</label>
-                  <select #patientCongregationModel="ngModel" type="text" [(ngModel)]="congregation" class="form-control" name='congregation' [ngClass]="{'is-invalid':patientCongregationModel.errors &&
-                    patientCongregationModel.touched}"
+                  <select #patientCongregationModel="ngModel" type="text" [(ngModel)]="congregation" class="form-control" name='congregation'
+                  [ngClass]="{'is-invalid':( patientCongregationModel?.errors &&  patientCongregationModel?.touched ) || ( patientCongregationModel?.errors && hasError )}"
                     required>
                     <option> </option>
                     <option *ngFor="let cong of congregations" [ngValue]="cong">{{ cong?.name }}</option>
                   </select>
 
                   <div [hidden]="!patientCongregationModel.errors?.required" class="invalid-feedback">
-                    Congregação requerida
+                    Campo obrigatório
                   </div>
 
                 </div>
@@ -314,19 +336,22 @@
 
         <div class="col-md-2">
             <div class="form-group">
-              <label for="mobileElder1">Celular Ancião 1</label>
+              <label for="mobileElder1">Celular Ancião 1 *</label>
               <input
               type="text"
               class="form-control"
               name="mobileElder1"
               #mobileElder1Model="ngModel"
-              [ngClass]="{'is-invalid':mobileElder1Model.errors && mobileElder1Model.touched}"
+              [ngClass]="{'is-invalid':( mobileElder1Model.errors && mobileElder1Model.touched ) || ( mobileElder1Model.errors && hasError )}"
               [(ngModel)]="patient.mobileElder1"
-              (keypress)="maskPhones.onKeyPressMobilePhone($event,'mobileElder1')"
-              minlength="15"
-              maxlength="15"
+              minlength="11"
               placeholder="(00) 00000-0000"
+              mask="(00) 00000-0000"
+              required
               >
+              <div [hidden]="!mobileElder1Model.errors?.required" class="invalid-feedback">
+                Campo obrigatório
+              </div>
 
               <div [hidden]="!mobileElder1Model.errors?.minlength" class="invalid-feedback">
                   Formato incorreto
@@ -345,10 +370,9 @@
                 #phoneElder1Model="ngModel"
                 [ngClass]="{'is-invalid':phoneElder1Model.errors && phoneElder1Model.touched}"
                 [(ngModel)]="patient.phoneElder1"
-                (keypress)="maskPhones.onKeyPressPhone($event, 'phoneElder1')"
-                minlength="14"
-                maxlength="14"
+                minlength="10"
                 placeholder="(00) 0000-0000"
+                mask="(00) 0000-0000"
                 >
 
                 <div [hidden]="!phoneElder1Model.errors?.minlength" class="invalid-feedback">
@@ -372,10 +396,9 @@
           #mobileElder2Model="ngModel"
           [ngClass]="{'is-invalid':mobileElder2Model.errors && mobileElder2Model.touched}"
           [(ngModel)]="patient.mobileElder2"
-          (keypress)="maskPhones.onKeyPressMobilePhone($event, 'mobileElder2')"
-          minlength="15"
-          maxlength="15"
+          minlength="11"
           placeholder="(00) 00000-0000"
+          mask="(00) 00000-0000"
           >
 
           <div [hidden]="!mobileElder2Model.errors?.minlength" class="invalid-feedback">
@@ -395,10 +418,9 @@
             #phoneElder2Model="ngModel"
             [ngClass]="{'is-invalid':phoneElder2Model.errors && phoneElder2Model.touched}"
             [(ngModel)]="patient.phoneElder2"
-            (keypress)="maskPhones.onKeyPressPhone($event, 'phoneElder2')"
-            minlength="14"
-            maxlength="14"
+            minlength="10"
             placeholder="(00) 0000-0000"
+            mask="(00) 0000-0000"
             >
 
             <div [hidden]="!phoneElder2Model.errors?.minlength" class="invalid-feedback">
@@ -422,34 +444,35 @@
   <div class="form-group" class="col-md-3" >
 
       <label for="hospital">Hospital internado *</label>
-      <select #patientHospitalModel="ngModel" type="text" [(ngModel)]="hospital" class="form-control" name="hospital" [ngClass]="{'is-invalid':patientHospitalModel.errors &&
-        patientHospitalModel.touched}"
+      <select #patientHospitalModel="ngModel" type="text" [(ngModel)]="hospital" class="form-control" name="hospital"
+        [ngClass]="{'is-invalid':( patientHospitalModel?.errors && patientHospitalModel?.touched ) || ( patientHospitalModel?.errors && hasError )}"
         required>
         <option> </option>
         <option *ngFor="let hosp of hospitals" [ngValue]="hosp">{{ hosp?.name }}</option>
       </select>
 
       <div [hidden]="!patientHospitalModel.errors?.required" class="invalid-feedback">
-        Hospital requerido
+        Campo obrigatório
       </div>
 
     </div>
 
     <div class="col-md-3">
       <div class="form-group">
-        <label for="hospitalizationDate">Data de internação</label>
+        <label for="hospitalizationDate">Data de internação *</label>
         <input
         type="date"
         class="form-control"
         name="hospitalizationDate"
         #hospitalizationDateModel="ngModel"
-        [ngClass]="{'is-invalid':hospitalizationDateModel.errors && hospitalizationDateModel.touched}"
-        [(ngModel)]="patient.hospitalizationDate"
+        [ngClass]="{'is-invalid':( hospitalizationDateModel?.errors && hospitalizationDateModel?.touched ) || ( !patient.hospitalizationDate && hasError )}"
+        [ngModel]="patient.hospitalizationDate | date:'yyyy-MM-dd'"
+        (ngModelChange)="patient.hospitalizationDate = $event"
         required
         >
 
         <div [hidden]="!hospitalizationDateModel.errors?.required" class="invalid-feedback">
-            Formato incorreto
+            Campo obrigatório
           </div>
 
       </div>
@@ -464,8 +487,9 @@
         name="medicalRelease"
         #medicalReleaseModel="ngModel"
         [ngClass]="{'is-invalid':medicalReleaseModel.errors && medicalReleaseModel.touched}"
-        [(ngModel)]="patient.medicalRelease"
-        required
+        [ngModel]="patient.medicalRelease | date:'yyyy-MM-dd'"
+        (ngModelChange)="patient.medicalRelease = $event"
+
         >
 
         <div [hidden]="!medicalReleaseModel.errors?.required" class="invalid-feedback">
@@ -478,17 +502,13 @@
 
     <div class="form-group" class="col-md-3" >
 
-      <label for="accommodation">Hospedagem *</label>
-      <select #patientAccommodationModel="ngModel" type="text" [(ngModel)]="accommodation" class="form-control" name='accommodation' [ngClass]="{'is-invalid':patientAccommodationModel.errors &&
-        patientAccommodationModel.touched}"
-        required>
+      <label for="accommodation">Hospedagem</label>
+      <select #patientAccommodationModel="ngModel" type="text" [(ngModel)]="accommodation" class="form-control" name='accommodation' [ngClass]="{'is-invalid':patientAccommodationModel?.errors &&
+        patientAccommodationModel?.touched}"
+        >
         <option> </option>
         <option *ngFor="let accom of accommodations" [ngValue]="accom">{{ accom?.name }}</option>
       </select>
-
-      <div [hidden]="!patientAccommodationModel.errors?.required" class="invalid-feedback">
-        Hospedagem requerida
-      </div>
 
     </div>
 

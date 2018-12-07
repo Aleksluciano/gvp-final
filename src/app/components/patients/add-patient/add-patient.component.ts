@@ -14,7 +14,6 @@ import { Congregation } from "../../congregations/congregation.model";
 import { CongregationsService } from "../../congregations/congregations.service";
 import { MatDialog } from "@angular/material";
 import { InfoModalComponent } from "../../info-modal/info-modal.component";
-import { MaskPhones } from "../../../mask/phone-mask";
 import { Accommodation } from "../../accommodations/accommodation.model";
 import { Hospital } from "../../hospitals/hospital.model";
 import { HospitalsService } from "../../hospitals/hospitals.service";
@@ -29,7 +28,7 @@ import { AccommodationsService } from "../../accommodations/accommodations.servi
   styleUrls: ["./add-patient.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
@@ -38,6 +37,8 @@ export class AddPatientComponent implements OnInit, OnDestroy {
   form: any;
   @ViewChild("firstNameRef")
   firstNameRef: ElementRef;
+
+  hasError = false;
 
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
@@ -62,17 +63,9 @@ export class AddPatientComponent implements OnInit, OnDestroy {
 
   hospitals: Hospital[] = [];
   hospitalsSub: Subscription;
-  hospital: Hospital = {
-    id: "",
-    name: "",
-    cep: "",
-    state: "",
-    city: "",
-    neighborhood: "",
-    address: "",
-    numeral: null,
-    complement: ""
-  };
+  hospital: Hospital;
+
+  newdate = new Date();
 
   patients: Patient[] = [];
   patientsSub: Subscription;
@@ -103,7 +96,7 @@ export class AddPatientComponent implements OnInit, OnDestroy {
     infoWho: "Gvp",
   };
 
-  maskPhones = new MaskPhones(this.patient);
+
 
 
 
@@ -189,15 +182,22 @@ this.hospitalsSub = this.hospitalsService
         cssClass: "alert-danger",
         timeout: 4000
       });
+      this.hasError = true;
       window.scrollTo(0, 0);
     } else {
 
       // Add new client
       value.congregation = this.congregation.name;
+
+      if(this.accommodation.id)
       value.accommodation = this.accommodation.id;
+      else value.accommodation = null;
+
+      this.accommodation.id;
       value.hospital = this.hospital.id;
 
       this.patientsService.createPatient(value);
+      this.hasError = false;
 
     }
   }

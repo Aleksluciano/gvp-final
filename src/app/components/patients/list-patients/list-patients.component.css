@@ -30,7 +30,6 @@ thead{
 }
 
 
-
 td{
   word-break:break-all
 }
@@ -40,6 +39,11 @@ td{
   .colhide{
     display: none;
   }
+}
+
+
+mat-spinner{
+  margin: auto;
 }
 
 

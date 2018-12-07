@@ -1,4 +1,7 @@
-<div class="row" @fade>
+<div *ngIf="!isLoaded">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="row" @fade *ngIf="isLoaded">
 <div class="col-md-3">
   <div class="card text-center text-white mb-3" id="cardUser">
   <div class="card-body">

@@ -14,7 +14,6 @@ import { UsersService } from "../users.service";
 import { Subscription } from "rxjs";
 import { CongregationsService } from "../../congregations/congregations.service";
 import { InfoModalComponent } from "../../info-modal/info-modal.component";
-import { MaskPhones } from 'src/app/mask/phone-mask';
 
 @Component({
   selector: "app-edit-user",
@@ -22,7 +21,7 @@ import { MaskPhones } from 'src/app/mask/phone-mask';
   styleUrls: ["./edit-user.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
@@ -48,11 +47,13 @@ export class EditUserComponent implements OnInit, OnDestroy {
     password: ""
   };
   userSub: Subscription;
-  maskPhones: MaskPhones;
+
+
+  hasError = false;
 
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
-  congregation: Congregation = { id: "", name: "" };
+  congregation: Congregation = {id:"",name:""};
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -75,10 +76,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
     }
 
     this.userSub = this.usersService.getOneUserUpdateListener().subscribe((user) => this.user = user)
-
-
-    this.maskPhones = new MaskPhones(this.user);
-
 
 
     this.congregations = this.congregationsService.Congregations;
@@ -105,6 +102,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
         cssClass: "alert-danger",
         timeout: 4000
       });
+      this.hasError = true;
+      window.scrollTo(0, 0);
     } else {
 
       // Update User

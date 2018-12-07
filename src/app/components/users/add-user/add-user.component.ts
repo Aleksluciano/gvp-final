@@ -13,15 +13,14 @@ import { Congregation } from "../../congregations/congregation.model";
 import { CongregationsService } from "../../congregations/congregations.service";
 import { MatDialog } from "@angular/material";
 import { InfoModalComponent } from "../../info-modal/info-modal.component";
-import { MaskPhones } from "../../../mask/phone-mask";
-
+import { HostListener } from '@angular/core';
 @Component({
   selector: "app-add-user",
   templateUrl: "./add-user.component.html",
   styleUrls: ["./add-user.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
@@ -31,12 +30,14 @@ export class AddUserComponent implements OnInit, OnDestroy {
   @ViewChild("firstNameRef")
   firstNameRef: ElementRef;
 
+  hasError = false;
+
   usersSub: Subscription;
 
 
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
-  congregation: Congregation = { id: "", name: ""};
+  congregation: Congregation;
 
 
   users: User[] = [];
@@ -60,7 +61,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
     password: ""
   };
 
-  maskPhones = new MaskPhones(this.user);
+
 
   constructor(
     private flashMessage: FlashMessagesService,
@@ -104,12 +105,15 @@ export class AddUserComponent implements OnInit, OnDestroy {
         cssClass: "alert-danger",
         timeout: 4000
       });
+      this.hasError = true;
       window.scrollTo(0, 0);
+
     } else {
 
       // Add new client
       value.congregation = this.congregation.name;
       this.usersService.createUser(value);
+      this.hasError = false;
 
     }
   }
@@ -173,6 +177,7 @@ export class AddUserComponent implements OnInit, OnDestroy {
   onBackClicked() {
     this.location.back();
   }
+
 
 
 }

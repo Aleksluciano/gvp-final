@@ -178,7 +178,7 @@
     </div>
   </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-6" @fade>
 
         <input type="text" class="form-control" name="filteredName" [ngModel]="filteredName" (ngModelChange)="filteredName = $event"
           placeholder="Filtrar por nome">
@@ -193,7 +193,7 @@
               <th id="actions" colspan="3">Ações</th>
             </tr>
           </thead>
-          <tbody @fade>
+          <tbody>
             <tr *ngFor="let hospital of  hospitals | filter: filteredName : 'name'">
               <td >{{ hospital.name }}</td>
               <td ><button (click)="onSelectedToView(hospital)" ><i class="fa fa-eye" aria-hidden="true"></i></button></td>

@@ -12,6 +12,9 @@ import { EditUserComponent } from './edit-user/edit-user.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { FilterModule } from './../../pipes/filter.module';
 import { UsersRoutingModule } from './users-routing.module';
+import { NgxMaskInputModule } from 'ngx-mask-input';
+import { NgxMaskModule } from 'ngx-mask';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 
 
@@ -29,7 +32,9 @@ import { UsersRoutingModule } from './users-routing.module';
     NgxViacepModule,
     RouterModule,
     FilterModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    NgxMaskModule.forRoot(),
+    MatProgressSpinnerModule
   ]
 })
 export class UsersModule { }

@@ -20,7 +20,7 @@ import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.compone
     trigger('fade',[
       transition('void => *',[
         style({ opacity: 0}),
-        animate(500)
+        animate(1000)
       ])
     ])
       ]

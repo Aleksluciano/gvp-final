@@ -11,6 +11,7 @@
     Atualizar Usuário
   </div>
   <div class="card-body">
+      <p>Os campos com * são obrigatórios</p>
       <br>
       <h6 class="card-subtitle mb-2 text-muted">Dados pessoais</h6>
 
@@ -25,16 +26,17 @@
             <input
             type="text"
             class="form-control"
+            #firstNameRef
             name="firstName"
             #firstNameModel="ngModel"
-            [ngClass]="{'is-invalid':firstNameModel.errors && firstNameModel.touched}"
+            [ngClass]="{'is-invalid':(firstNameModel.errors && firstNameModel.touched ) || (firstNameModel.errors && hasError) }"
             [ngModel]="user.firstName"
             (ngModelChange)="user.firstName = $event"
             minlength="3"
             required>
 
             <div [hidden]="!firstNameModel.errors?.required" class="invalid-feedback">
-              Nome requerido
+              Campo obrigatório
             </div>
 
             <div [hidden]="!firstNameModel.errors?.minlength" class="invalid-feedback">
@@ -51,14 +53,14 @@
             class="form-control"
             name="lastName"
             #lastNameModel="ngModel"
-            [ngClass]="{'is-invalid':lastNameModel.errors && lastNameModel.touched}"
+            [ngClass]="{'is-invalid':( lastNameModel.errors && lastNameModel.touched ) || ( lastNameModel.errors && hasError)}"
             [ngModel]="user.lastName"
             (ngModelChange)="user.lastName = $event"
             minlength="2"
             required>
 
             <div [hidden]="!lastNameModel.errors?.required" class="invalid-feedback">
-              Sobrenome requerido
+              Campo obrigatório
             </div>
 
             <div [hidden]="!lastNameModel.errors?.minlength" class="invalid-feedback">
@@ -75,19 +77,23 @@
 
             <div class="col-md-4">
                 <div class="form-group">
-                  <label for="mobilePhone">Telefone celular</label>
+                  <label for="mobilePhone">Telefone celular *</label>
                   <input
                   type="text"
                   class="form-control"
                   name="mobilePhone"
                   #mobilePhoneModel="ngModel"
-                  [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
+                  [ngClass]="{'is-invalid':( mobilePhoneModel.errors && mobilePhoneModel.touched ) || ( mobilePhoneModel.errors && hasError ) }"
                   [(ngModel)]="user.mobilePhone"
-                  (keypress)="maskPhones.onKeyPressMobilePhone($event)"
-                  minlength="15"
-                  maxlength="15"
+                  minlength="11"
                   placeholder="Ex.: (00) 00000-0000"
+                  mask="(00) 00000-0000"
+                  required
                   >
+
+                  <div [hidden]="!mobilePhoneModel.errors?.required" class="invalid-feedback">
+                    Campo obrigatório
+                  </div>
 
                   <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
                       Formato incorreto
@@ -104,12 +110,11 @@
                     class="form-control"
                     name="phone"
                     #phoneModel="ngModel"
-                    [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
+                    [ngClass]="{'is-invalid':( phoneModel.errors && phoneModel.touched ) || ( phoneModel.errors && hasError)}"
                     [(ngModel)]="user.phone"
-                    (keypress)="maskPhones.onKeyPressPhone($event)"
-                    minlength="14"
-                    maxlength="14"
+                    minlength="10"
                     placeholder="Ex.: (00) 0000-0000"
+                    mask="(00) 0000-0000"
                     >
 
                     <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
@@ -133,6 +138,7 @@
 
        <div class="col-md-2">
           <div class="form-group">
+
               <label for="cep">CEP</label>
               <div class="input-group">
               <input
@@ -156,78 +162,106 @@
 
             <div class="col-md-2">
                  <div class="form-group">
-                     <label for="state">Estado</label>
+                     <label for="state">Estado *</label>
                      <input
                      type="text"
                      class="form-control"
                      name="state"
                      #stateModel="ngModel"
-                     [ngClass]="{'is-invalid':stateModel.errors && stateModel.touched}"
+                     [ngClass]="{'is-invalid':( stateModel.errors && stateModel.touched ) || ( stateModel.errors && hasError)}"
                      [(ngModel)]="user.state"
                      maxlength="2"
-
+                     minlength="2"
+                     required
                      >
+
+                     <div [hidden]="!stateModel.errors?.required" class="invalid-feedback">
+                      Campo obrigatório
+                    </div>
+
+                    <div [hidden]="!stateModel.errors?.minlength" class="invalid-feedback">
+                        Formato incorreto
+                      </div>
 
                    </div>
                 </div>
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="city">Cidade</label>
+                        <label for="city">Cidade *</label>
                         <input
                         type="text"
                         class="form-control"
                         name="city"
                         #cityModel="ngModel"
-                        [ngClass]="{'is-invalid':cityModel.errors && cityModel.touched}"
+                        [ngClass]="{'is-invalid':( cityModel.errors && cityModel.touched ) || ( cityModel.errors && hasError )}"
                         [(ngModel)]="user.city"
-
+                        required
                         >
+
+                        <div [hidden]="!cityModel.errors?.required" class="invalid-feedback">
+                          Campo obrigatório
+                        </div>
 
                       </div>
                    </div>
 
                    <div class="col-md-3">
                       <div class="form-group">
-                          <label for="neighborhood">Bairro</label>
+                          <label for="neighborhood">Bairro *</label>
                           <input
                           type="text"
                           class="form-control"
                           name="neighborhood"
                           #neighborhoodModel="ngModel"
-                          [ngClass]="{'is-invalid':neighborhoodModel.errors && neighborhoodModel.touched}"
+                          [ngClass]="{'is-invalid':( neighborhoodModel.errors && neighborhoodModel.touched ) || ( neighborhoodModel.errors && hasError )}"
                           [(ngModel)]="user.neighborhood"
+                          required
                           >
+
+                          <div [hidden]="!neighborhoodModel.errors?.required" class="invalid-feedback">
+                            Campo obrigatório
+                          </div>
 
                         </div>
                      </div>
 
                      <div class="col-md-4">
                         <div class="form-group">
-                            <label for="address">Logradouro (Rua, Avenida, etc)</label>
+                            <label for="address">Logradouro (Rua, Avenida, etc) *</label>
                             <input
                             type="text"
                             class="form-control"
                             name="address"
                             #addressModel="ngModel"
-                            [ngClass]="{'is-invalid':addressModel.errors && addressModel.touched}"
+                            [ngClass]="{'is-invalid':( addressModel.errors && addressModel.touched ) || ( addressModel.errors && hasError )}"
                             [(ngModel)]="user.address"
+                            required
                             >
+
+                            <div [hidden]="!addressModel.errors?.required" class="invalid-feedback">
+                              Campo obrigatório
+                            </div>
 
                           </div>
                        </div>
 
                        <div class="col-md-2">
                         <div class="form-group">
-                            <label for="numeral">Número</label>
+                            <label for="numeral">Número *</label>
                             <input
                             type="number"
                             class="form-control"
                             name="numeral"
                             #numeralModel="ngModel"
-                            [ngClass]="{'is-invalid':numeralModel.errors && numeralModel.touched}"
+                            [ngClass]="{'is-invalid':( numeralModel.errors && numeralModel.touched ) || ( numeralModel.errors && hasError )}"
                             [(ngModel)]="user.numeral"
+                            required
                             >
+
+                            <div [hidden]="!numeralModel.errors?.required" class="invalid-feedback">
+                              Campo obrigatório
+                            </div>
 
                           </div>
                        </div>
@@ -264,24 +298,26 @@
             <div class="form-group" class="col-md-3" id="sel">
 
                 <label for="congregation">Congregação *</label>
-                <select #userCongregation="ngModel" type="text" [(ngModel)]="congregation" class="form-control" name='congregation' [ngClass]="{'is-invalid':userCongregation.errors &&
-                  userCongregation.touched}"
+                <select #userCongregationModel="ngModel" type="text" [(ngModel)]="congregation" class="form-control" name='congregation'
+                [ngClass]="{'is-invalid':( userCongregationModel?.errors && userCongregationModel?.touched ) || ( userCongregationModel?.errors && hasError )}"
                   required>
-                  <option> </option>
+                   <option ></option>
                   <option *ngFor="let cong of congregations" [ngValue]="cong">{{ cong?.name }}</option>
                 </select>
 
-                <div [hidden]="!userCongregation.errors?.required" class="invalid-feedback">
-                  Congregação requerida
+                <div [hidden]="!userCongregationModel.errors?.required" class="invalid-feedback">
+                  Campo obrigatório
                 </div>
 
               </div>
+
             </div>
             <br>
             <div class="row">
 
                 <div class="col-md-6">
                     <div class="form-group">
+
                      <label>Perfil</label><br>
                     <label class="radio-inline">
                         <input type="radio"  name="perfil" value="Membro" id="Membro" [(ngModel)]="user.perfil" > Membro
@@ -336,14 +372,14 @@
           class="form-control"
           name="email"
           #emailModel="ngModel"
-          [ngClass]="{'is-invalid':emailModel.errors && emailModel.touched}"
+          [ngClass]="{'is-invalid':( emailModel.errors && emailModel.touched ) || ( emailModel.errors && hasError )}"
           [(ngModel)]="user.email"
           pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
           placeholder="Ex.: usuario@dominio.com"
           required>
 
           <div [hidden]="!emailModel.errors?.required" class="invalid-feedback">
-            Email requerido
+            Campo obrigatório
           </div>
 
           <div [hidden]="!emailModel.errors?.pattern" class="invalid-feedback">
@@ -351,8 +387,7 @@
           </div>
         </div>
       </div>
-
-    </div>
+   </div>
 
 <br><br>
 

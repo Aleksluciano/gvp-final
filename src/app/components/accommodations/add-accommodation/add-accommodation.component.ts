@@ -13,7 +13,6 @@ import { MatDialogConfig, MatDialog } from "@angular/material";
 import { ConfirmModalComponent } from "../../confirm-modal/confirm-modal.component";
 import { InfoModalComponent } from "../../info-modal/info-modal.component";
 import { NgxViacepService } from "@brunoc/ngx-viacep";
-import { MaskPhones } from './../../../mask/phone-mask';
 
 @Component({
   selector: "app-add-accommodation",
@@ -21,7 +20,7 @@ import { MaskPhones } from './../../../mask/phone-mask';
   styleUrls: ["./add-accommodation.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })
@@ -32,7 +31,7 @@ export class AddAccommodationComponent implements OnInit, OnDestroy {
   isNew: boolean = true;
   textInput = "Criar";
   filteredName: string = "";
-  maskPhones: MaskPhones;
+
 
 
   modeView = false;
@@ -63,7 +62,7 @@ export class AddAccommodationComponent implements OnInit, OnDestroy {
 
     this.accommodations = this.accommodationsService.Accommodations;
 
-    this.maskPhones = new MaskPhones(this.accommodation);
+
 
     if (this.accommodations.length <= 0)
       this.accommodationsService.getAccommodationsServer();
@@ -91,7 +90,7 @@ export class AddAccommodationComponent implements OnInit, OnDestroy {
       phone: accommodation.phone
     };
 
-    this.maskPhones = new MaskPhones(this.accommodation);
+
 
     this.modeView = false;
     this.isNew = false;

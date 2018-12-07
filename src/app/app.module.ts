@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatDialogModule} from "@angular/material";
+import {MatDialogModule, MatProgressSpinnerModule} from "@angular/material";
 
 
 
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import {NgxMaskModule} from 'ngx-mask'
+import { NgxMaskInputModule } from 'ngx-mask-input';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -19,6 +20,7 @@ import { ErrorInterceptor } from './error-interceptor';
 import { ErrorComponent } from './error/error.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 import { BeginComponent } from './components/begin/begin.component';
+
 
 
 
@@ -40,7 +42,8 @@ import { BeginComponent } from './components/begin/begin.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgbModule
+    NgbModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}],
   bootstrap: [AppComponent],

@@ -18,7 +18,7 @@ import { ConfirmModalComponent } from '../../confirm-modal/confirm-modal.compone
     trigger('fade',[
       transition('void => *',[
         style({ opacity: 0}),
-        animate(500)
+        animate(1000)
       ]),
     ]),
       ]
@@ -28,6 +28,8 @@ export class ListUsersComponent implements OnInit, OnDestroy {
   users: User[] = [];
   filteredName: string = '';
   filteredEmail: string = '';
+
+  isLoaded: boolean = false;
 
   constructor(
     private usersService: UsersService,
@@ -39,12 +41,14 @@ export class ListUsersComponent implements OnInit, OnDestroy {
 
      this.users = this.usersService.Users;
     if (this.users.length <= 0)this.usersService.getUsersServer();
+    else this.isLoaded = true;
 
     this.usersSub = this.usersService
       .getUsersUpdateListener()
       .subscribe( usersData  => {
        this.users = usersData
- 
+       this.isLoaded = true;
+
       });
 
 

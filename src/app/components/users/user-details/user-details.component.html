@@ -26,8 +26,8 @@
       <div class="row">
       <ul class="list-group col-md-4">
          <li class="list-group-item"><strong class="Topic">Email:</strong> {{ user.email }}</li>
-         <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ user.mobilePhone }}</li>
-         <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ user.phone }}</li>
+         <li class="list-group-item"><strong class="Topic">Celular:</strong><a class="linkClass" href="tel:{{ user.mobilePhone }}"> {{ user.mobilePhone | mask:"(00) 00000-0000" }}</a></li>
+         <li class="list-group-item"><strong class="Topic">Telefone:</strong><a class="linkClass" href="tel:{{ user.phone }}"> {{ user.phone | mask:"(00) 0000-0000" }}</a></li>
          <li class="list-group-item"><strong class="Topic">Congregação:</strong> {{ user.congregation }}</li>
          <li class="list-group-item"><strong class="Topic">Perfil:</strong> {{ user.perfil }}</li>
          <li class="list-group-item"><strong class="Topic">Região:</strong> {{ user.region }}</li>
@@ -36,17 +36,6 @@
          <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ user.address }}, {{ user.numeral }}
           {{ user.complement }} - {{ user.neighborhood }} - {{ user.city }} - {{ user.state }}</li>
       </ul>
-        <!-- <ul class="list-group col-md-4">
-         <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ user.state }}</li>
-         <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ user.city }}</li>
-         <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ user.neighborhood }}</li>
-         <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ user.address }}</li>
-         <li class="list-group-item"><strong class="Topic">Número:</strong> {{ user.numeral }}</li>
-         <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ user.complement }}</li>
-      </ul>
-      <ul class="list-group col-md-4">
-          <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ user.cep }}</li>
-        </ul> -->
     </div>
     </div>
   </div>

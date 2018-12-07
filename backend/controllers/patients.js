@@ -1,5 +1,6 @@
 const Patient = require("../models/patient");
 
+
 exports.createPatient = async (req, res, next) => {
 
   const patient = new Patient({

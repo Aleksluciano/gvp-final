@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "gvp101": {
+    "gvpsistema": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -52,18 +52,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "gvp101:build"
+            "browserTarget": "gvpsistema:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "gvp101:build:production"
+              "browserTarget": "gvpsistema:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "gvp101:build"
+            "browserTarget": "gvpsistema:build"
           }
         },
         "test": {
@@ -98,7 +98,7 @@
         }
       }
     },
-    "gvp101-e2e": {
+    "gvpsistema-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "targets": {
@@ -106,11 +106,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "gvp101:serve"
+            "devServerTarget": "gvpsistema:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "gvp101:serve:production"
+              "devServerTarget": "gvpsistema:serve:production"
             }
           }
         },
@@ -126,5 +126,5 @@
       }
     }
   },
-  "defaultProject": "gvp101"
+  "defaultProject": "gvpsistema"
 }

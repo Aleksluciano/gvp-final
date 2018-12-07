@@ -20,7 +20,7 @@ import { NgxViacepService } from "@brunoc/ngx-viacep";
   styleUrls: ["./add-hospital.component.css"],
   animations: [
     trigger("fade", [
-      transition("void => *", [style({ opacity: 0 }), animate(500)])
+      transition("void => *", [style({ opacity: 0 }), animate(1000)])
     ])
   ]
 })

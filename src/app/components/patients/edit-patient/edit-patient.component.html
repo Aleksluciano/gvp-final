@@ -32,7 +32,6 @@
             [ngModel]="patient?.firstName"
             (ngModelChange)="patient.firstName = $event"
             minlength="3"
-            autofocus
             required>
 
             <div [hidden]="!firstNameModel.errors?.required" class="invalid-feedback">
@@ -85,10 +84,10 @@
                   #mobilePhoneModel="ngModel"
                   [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
                   [(ngModel)]="patient.mobilePhone"
-                  (keypress)="maskPhones.onKeyPressMobilePhone($event)"
-                  minlength="15"
-                  maxlength="15"
+                  minlength="11"
                   placeholder="Ex.: (00) 00000-0000"
+                  mask="(00) 00000-0000"
+                  required
                   >
 
                   <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
@@ -108,10 +107,9 @@
                     #phoneModel="ngModel"
                     [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
                     [(ngModel)]="patient.phone"
-                    (keypress)="maskPhones.onKeyPressPhone($event)"
-                    minlength="14"
-                    maxlength="14"
+                    minlength="10"
                     placeholder="Ex.: (00) 0000-0000"
+                    mask="(00) 0000-0000"
                     >
 
                     <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
@@ -322,10 +320,10 @@
             #mobileElder1Model="ngModel"
             [ngClass]="{'is-invalid':mobileElder1Model.errors && mobileElder1Model.touched}"
             [(ngModel)]="patient.mobileElder1"
-            (keypress)="maskPhones.onKeyPressMobilePhone($event,'mobileElder1')"
-            minlength="15"
-            maxlength="15"
+            minlength="11"
             placeholder="(00) 00000-0000"
+            mask="(00) 00000-0000"
+            required
             >
 
             <div [hidden]="!mobileElder1Model.errors?.minlength" class="invalid-feedback">
@@ -345,10 +343,9 @@
               #phoneElder1Model="ngModel"
               [ngClass]="{'is-invalid':phoneElder1Model.errors && phoneElder1Model.touched}"
               [(ngModel)]="patient.phoneElder1"
-              (keypress)="maskPhones.onKeyPressPhone($event, 'phoneElder1')"
-              minlength="14"
-              maxlength="14"
+              minlength="10"
               placeholder="(00) 0000-0000"
+              mask="(00) 0000-0000"
               >
 
               <div [hidden]="!phoneElder1Model.errors?.minlength" class="invalid-feedback">
@@ -372,10 +369,9 @@
         #mobileElder2Model="ngModel"
         [ngClass]="{'is-invalid':mobileElder2Model.errors && mobileElder2Model.touched}"
         [(ngModel)]="patient.mobileElder2"
-        (keypress)="maskPhones.onKeyPressMobilePhone($event, 'mobileElder2')"
-        minlength="15"
-        maxlength="15"
+        minlength="11"
         placeholder="(00) 00000-0000"
+        mask="(00) 00000-0000"
         >
 
         <div [hidden]="!mobileElder2Model.errors?.minlength" class="invalid-feedback">
@@ -395,10 +391,9 @@
           #phoneElder2Model="ngModel"
           [ngClass]="{'is-invalid':phoneElder2Model.errors && phoneElder2Model.touched}"
           [(ngModel)]="patient.phoneElder2"
-          (keypress)="maskPhones.onKeyPressPhone($event, 'phoneElder2')"
-          minlength="14"
-          maxlength="14"
+          minlength="10"
           placeholder="(00) 0000-0000"
+          mask="(00) 0000-0000"
           >
 
           <div [hidden]="!phoneElder2Model.errors?.minlength" class="invalid-feedback">

@@ -64,10 +64,9 @@
                           #mobilePhoneModel="ngModel"
                           [ngClass]="{'is-invalid':mobilePhoneModel.errors && mobilePhoneModel.touched}"
                           [(ngModel)]="assistant.mobilePhone"
-                          (keypress)="maskPhones.onKeyPressMobilePhone($event)"
-                          minlength="15"
-                          maxlength="15"
+                          minlength="11"
                           placeholder="(00) 00000-0000 - celular"
+                          mask="(00) 00000-0000"
                           >
 
                           <div [hidden]="!mobilePhoneModel.errors?.minlength" class="invalid-feedback">
@@ -89,10 +88,9 @@
                             #phoneModel="ngModel"
                             [ngClass]="{'is-invalid':phoneModel.errors && phoneModel.touched}"
                             [(ngModel)]="assistant.phone"
-                            (keypress)="maskPhones.onKeyPressPhone($event)"
-                            minlength="14"
-                            maxlength="14"
+                            minlength="10"
                             placeholder="(00) 0000-0000 - fixo"
+                            mask="(00) 0000-0000"
                             >
 
                             <div [hidden]="!phoneModel.errors?.minlength" class="invalid-feedback">
@@ -127,14 +125,14 @@
       <div class="row">
         <ul class="list-group col-md-6">
             <li class="list-group-item"><strong class="Topic">Hospitais que trabalha:</strong> {{ assistant.hospitals.join(', ')}} </li>
-            <li class="list-group-item"><strong class="Topic">Celular:</strong> {{ assistant.mobilePhone }}</li>
-             <li class="list-group-item"><strong class="Topic">Telefone:</strong> {{ assistant.phone }}</li>
+            <li class="list-group-item"><strong class="Topic">Celular:</strong><a class="linkClass" href="tel:{{ assistant.mobilePhone }}"> {{ assistant.mobilePhone | mask:"(00) 00000-0000" }}</a></li>
+             <li class="list-group-item"><strong class="Topic">Telefone:</strong><a class="linkClass" href="tel:{{ assistant.phone }}"> {{ assistant.phone | mask:"(00) 0000-0000"  }}</a></li>
            </ul>
     </div>
     </div>
   </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6" @fade>
 
         <input type="text" class="form-control" name="filteredName" [ngModel]="filteredName" (ngModelChange)="filteredName = $event"
           placeholder="Filtrar por nome">
@@ -149,7 +147,7 @@
               <th id="actions" colspan="3">Ações</th>
             </tr>
           </thead>
-          <tbody @fade>
+          <tbody>
             <tr *ngFor="let assistant of  assistants | filter: filteredName : 'name'">
               <td >{{ assistant.name }}</td>
               <td ><button (click)="onSelectedToView(assistant)" ><i class="fa fa-eye" aria-hidden="true"></i></button></td>

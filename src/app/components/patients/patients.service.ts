@@ -71,6 +71,7 @@ export class PatientsService {
           cssClass: 'alert-success', timeout: 4000
         });
         this.patientsUpdated.next([...this.patients]);
+        this.router.navigate(['/patients']);
 
       });
   }
@@ -194,6 +195,7 @@ export class PatientsService {
         cssClass: 'alert-success', timeout: 4000
       });
       this.patientsUpdated.next([...this.patients]);
+      this.router.navigate(['/patients']);
       //this.warnFlashMessage.next();
     })
   }

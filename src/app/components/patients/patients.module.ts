@@ -1,3 +1,4 @@
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
 import { NgModule } from '@angular/core';
@@ -14,6 +15,8 @@ import { PatientDetailsComponent } from './patient-details/patient-details.compo
 import { FilterModule } from './../../pipes/filter.module';
 import { PatientsRoutingModule } from './patients-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 
@@ -34,7 +37,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     RouterModule,
     FilterModule,
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatProgressSpinnerModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class PatientsModule { }

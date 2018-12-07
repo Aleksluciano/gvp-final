@@ -1,5 +1,5 @@
 const app = require("./app");
-const debug = require("debug")("gvp101");
+const debug = require("debug")("gvpsistema");
 const http = require("http");
 
 
