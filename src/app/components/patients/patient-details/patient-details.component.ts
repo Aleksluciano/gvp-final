@@ -116,7 +116,13 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
         this.patientsService.getOnePatientServer(this.id);
       }
 
-      this.patientSub = this.patientsService.getOnePatientUpdateListener().subscribe((patient) => this.patient = patient)
+      this.patientSub = this.patientsService.getOnePatientUpdateListener()
+      .subscribe((patient) =>{
+        this.patient = patient
+        this.hospitalsService.getHospitalsServer();
+        this.accommodationsService.getAccommodationsServer();
+
+      })
 
 
       //When delete return to list screen
@@ -128,11 +134,9 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
          //get Hospital
     this.hospitals = this.hospitalsService.Hospitals;
+    if (this.hospitals.length > 0)
+    this.hospital = this.searchById(this.hospitals, this.patient.hospital);
 
-    if (this.hospitals.length <= 0) this.hospitalsService.getHospitalsServer();
-    else {
-      this.hospital = this.searchById(this.hospitals, this.patient.hospital);
-    }
 
     this.hospitalsSub = this.hospitalsService
       .getHospitalsUpdateListener()
@@ -143,15 +147,12 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
 
     //get Accommodation
     this.accommodations = this.accommodationsService.Accommodations;
-
-    if (this.accommodations.length <= 0)
-      this.accommodationsService.getAccommodationsServer();
-    else {
+    if (this.accommodations.length > 0)
       this.accommodation = this.searchById(
         this.accommodations,
         this.patient.accommodation
       );
-    }
+
 
     this.accommodationsSub = this.accommodationsService
       .getAccommodationsUpdateListener()

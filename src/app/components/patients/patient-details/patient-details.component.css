@@ -10,3 +10,6 @@
   color: black;
 }
 
+.sameLine{
+display:inline-block;
+}

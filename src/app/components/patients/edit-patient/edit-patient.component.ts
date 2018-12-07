@@ -32,7 +32,7 @@ import { AccommodationsService } from "../../accommodations/accommodations.servi
 export class EditPatientComponent implements OnInit, OnDestroy {
   id: string;
   patientSub: Subscription;
-
+  hasError = false;
 
   congregations: Congregation[] = [];
   congregationsSub: Subscription;
@@ -40,7 +40,20 @@ export class EditPatientComponent implements OnInit, OnDestroy {
 
   accommodations: Accommodation[] = [];
   accommodationsSub: Subscription;
-  accommodation: Accommodation;
+  accommodation: Accommodation = {
+    id: "",
+    name: "",
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    address: "",
+    numeral: null,
+    complement: "",
+    responsable: "",
+    mobilePhone: "",
+    phone: ""
+  };
 
   hospitals: Hospital[] = [];
   hospitalsSub: Subscription;
@@ -103,70 +116,69 @@ export class EditPatientComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // Get id from url
-    this.id = this.route.snapshot.params["id"];
-    // Get client
+   // Get id from url
+   this.id = this.route.snapshot.params['id'];
+   // Get client
 
-    let patient = this.patientsService.getPatient(this.id);
-    if (patient)this.patient = patient;
-    else{
-      this.patientsService.getOnePatientServer(this.id);
-    }
+   let patient = this.patientsService.getPatient(this.id);
+   if (patient)this.patient = patient;
+   else{
+     this.patientsService.getOnePatientServer(this.id);
+   }
 
-    this.patientSub = this.patientsService.getOnePatientUpdateListener().subscribe((patient) => this.patient = patient)
+   this.patientSub = this.patientsService.getOnePatientUpdateListener()
+   .subscribe((patient) =>{
+     this.patient = patient
+     this.hospitalsService.getHospitalsServer();
+     this.accommodationsService.getAccommodationsServer();
+     this.congregationsService.getCongregationsServer();
+   })
 
-    this.congregations = this.congregationsService.Congregations;
+   this.congregations = this.congregationsService.Congregations;
 
-    if (this.congregations.length <= 0)
-      this.congregationsService.getCongregationsServer();
-    else {
-      this.congregation = this.searchCongregation();
-    }
+   if (this.congregations.length > 0)
+     this.congregation = this.searchCongregation();
 
-    this.congregationsSub = this.congregationsService
-      .getCongregationsUpdateListener()
-      .subscribe(congregationsData => {
-        this.congregations = congregationsData;
 
-        this.congregation = this.searchCongregation();
-      });
+   this.congregationsSub = this.congregationsService
+     .getCongregationsUpdateListener()
+     .subscribe(congregationsData => {
+       this.congregations = congregationsData;
+       this.congregation = this.searchCongregation();
+     });
 
-    //get Hospital
-    this.hospitals = this.hospitalsService.Hospitals;
 
-    if (this.hospitals.length <= 0) this.hospitalsService.getHospitalsServer();
-    else {
-      this.hospital = this.searchById(this.hospitals, this.patient.hospital);
-    }
+      //get Hospital
+ this.hospitals = this.hospitalsService.Hospitals;
+ if (this.hospitals.length > 0)
+ this.hospital = this.searchById(this.hospitals, this.patient.hospital);
 
-    this.hospitalsSub = this.hospitalsService
-      .getHospitalsUpdateListener()
-      .subscribe(hospitalsData => {
-        this.hospitals = hospitalsData;
-        this.hospital = this.searchById(this.hospitals, this.patient.hospital);
-      });
 
-    //get Accommodation
-    this.accommodations = this.accommodationsService.Accommodations;
+ this.hospitalsSub = this.hospitalsService
+   .getHospitalsUpdateListener()
+   .subscribe(hospitalsData => {
+     this.hospitals = hospitalsData;
+     this.hospital = this.searchById(this.hospitals, this.patient.hospital);
+   });
 
-    if (this.accommodations.length <= 0)
-      this.accommodationsService.getAccommodationsServer();
-    else {
-      this.accommodation = this.searchById(
-        this.accommodations,
-        this.patient.accommodation
-      );
-    }
+ //get Accommodation
+ this.accommodations = this.accommodationsService.Accommodations;
+ if (this.accommodations.length > 0)
+   this.accommodation = this.searchById(
+     this.accommodations,
+     this.patient.accommodation
+   );
 
-    this.accommodationsSub = this.accommodationsService
-      .getAccommodationsUpdateListener()
-      .subscribe(accommodationsData => {
-        this.accommodations = accommodationsData;
-        this.accommodation = this.searchById(
-          this.accommodations,
-          this.patient.accommodation
-        );
-      });
+
+ this.accommodationsSub = this.accommodationsService
+   .getAccommodationsUpdateListener()
+   .subscribe(accommodationsData => {
+     this.accommodations = accommodationsData;
+     this.accommodation = this.searchById(
+       this.accommodations,
+       this.patient.accommodation
+     );
+   });
   }
 
   onSubmit({ value, valid }: { value: Patient; valid: boolean }) {
@@ -176,14 +188,23 @@ export class EditPatientComponent implements OnInit, OnDestroy {
         cssClass: "alert-danger",
         timeout: 4000
       });
+
+      this.hasError = true;
+      window.scrollTo(0, 0);
     } else {
 
       // Update Patient
       value.congregation = this.congregation.name;
+
+      if(this.accommodation)
       value.accommodation = this.accommodation.id;
+      else value.accommodation = null;
+
       value.hospital = this.hospital.id;
       value.id = this.id;
       this.patientsService.updatePatient(this.id, value);
+
+      this.hasError = false;
     }
   }
 

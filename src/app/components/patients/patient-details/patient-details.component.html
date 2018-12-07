@@ -32,11 +32,11 @@
         <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ patient.address }}, {{ patient.numeral }}
           {{ patient.complement }} - {{ patient.neighborhood }} - {{ patient.city }} - {{ patient.state }}</li>
         <li class="list-group-item">
-        <strong class="Topic">Hospital:</strong>
-        <a class="linkClass" [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
-          <div *ngIf="showDetailsHospital">{{ hospital?.name }}( - )</div>
+        <div class="sameLine"><strong class="Topic">Hospital:</strong></div>
+        <div class="sameLine"><a class="linkClass" [routerLink]="" (click)="showDetailsHospital = !showDetailsHospital">
+           <div *ngIf="showDetailsHospital">{{ hospital?.name }}( - )</div>
           <div *ngIf="!showDetailsHospital">{{ hospital?.name }}(+)</div>
-        </a>
+        </a></div>
         <div *ngIf="showDetailsHospital"> Endereço: {{ hospital?.address }}, {{ hospital?.numeral }}
           {{ hospital?.complement }} - {{ hospital?.neighborhood }} - {{ hospital?.city }} - {{ hospital?.state }}
         </div>
@@ -48,8 +48,11 @@
         <li class="list-group-item"><strong class="Topic">Data de alta médica:</strong> {{ patient.medicalRelease |
           date:'dd-MM-yyyy' }}</li>
         <li class="list-group-item">
-              <strong class="Topic">Hospedagem:</strong>
-              <a class="linkClass" [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation"> {{ accommodation?.name }}</a>
+            <div class="sameLine"><strong class="Topic">Hospedagem:</strong></div>
+            <div *ngIf="accommodation" class="sameLine"><a class="linkClass" [routerLink]="" (click)="showDetailsAccommodation = !showDetailsAccommodation">
+            <div *ngIf="showDetailsAccommodation">{{ accommodation?.name }}( - )</div>
+          <div *ngIf="!showDetailsAccommodation">{{ accommodation?.name }}(+)</div>
+        </a></div>
               <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation.address }}, {{ accommodation.numeral }}
                 {{ accommodation.complement }} - {{ accommodation.neighborhood }} - {{ accommodation.city }} - {{ accommodation.state }}
               </div>

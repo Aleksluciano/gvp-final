@@ -75,22 +75,23 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.usersService.getOneUserServer(this.id);
     }
 
-    this.userSub = this.usersService.getOneUserUpdateListener().subscribe((user) => this.user = user)
+    this.userSub = this.usersService.getOneUserUpdateListener()
+    .subscribe((user) => {
+      this.user = user;
+      this.congregationsService.getCongregationsServer();
+    })
 
 
     this.congregations = this.congregationsService.Congregations;
 
-    if (this.congregations.length <= 0)
-      this.congregationsService.getCongregationsServer();
-    else {
+    if (this.congregations.length > 0)
       this.congregation = this.searchCongregation();
-    }
+
 
     this.congregationsSub = this.congregationsService
       .getCongregationsUpdateListener()
       .subscribe(congregationsData => {
         this.congregations = congregationsData;
-
         this.congregation = this.searchCongregation();
       });
   }

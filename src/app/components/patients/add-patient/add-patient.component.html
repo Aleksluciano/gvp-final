@@ -29,8 +29,7 @@
               name="firstName"
               #firstNameModel="ngModel"
               [ngClass]="{'is-invalid':( firstNameModel.errors && firstNameModel.touched ) || ( firstNameModel.errors && hasError )}"
-              [ngModel]="patient.firstName"
-              (ngModelChange)="patient.firstName = $event"
+              [(ngModel)]="patient.firstName"
               minlength="3"
               required>
 

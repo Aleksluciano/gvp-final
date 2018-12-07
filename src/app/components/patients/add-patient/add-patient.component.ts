@@ -189,11 +189,10 @@ this.hospitalsSub = this.hospitalsService
       // Add new client
       value.congregation = this.congregation.name;
 
-      if(this.accommodation.id)
+      if(this.accommodation)
       value.accommodation = this.accommodation.id;
       else value.accommodation = null;
 
-      this.accommodation.id;
       value.hospital = this.hospital.id;
 
       this.patientsService.createPatient(value);
