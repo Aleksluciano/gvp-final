@@ -70,8 +70,17 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.id = this.route.snapshot.params["id"];
     // Get client
     let user = this.usersService.getUser(this.id);
-    if (user)this.user = user;
-    else{
+    if (user){
+
+      this.user = user;
+
+
+    this.congregations = this.congregationsService.Congregations;
+    if (this.congregations.length > 0)
+      this.congregation = this.searchCongregation();
+      else this.congregationsService.getCongregationsServer();
+
+    }else{
       this.usersService.getOneUserServer(this.id);
     }
 
@@ -80,12 +89,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.user = user;
       this.congregationsService.getCongregationsServer();
     })
-
-
-    this.congregations = this.congregationsService.Congregations;
-
-    if (this.congregations.length > 0)
-      this.congregation = this.searchCongregation();
 
 
     this.congregationsSub = this.congregationsService

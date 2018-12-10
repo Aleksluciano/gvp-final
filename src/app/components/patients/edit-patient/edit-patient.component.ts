@@ -79,17 +79,18 @@ export class EditPatientComponent implements OnInit, OnDestroy {
     phoneElder1:  "",
     phoneElder2:  "",
     caseDescription: "",
-    hospital: "",
+    hospitalId: "",
     hospitalizationDate: null,
     medicalRelease: null,
-    accommodation: "",
+    accommodationId: "",
     infoWho: "",
+    report: null
   };
 
   config: AngularEditorConfig = {
     editable: true,
     spellcheck: true,
-    height: "15rem",
+    height: "30rem",
     minHeight: "5rem",
     placeholder: "Digite aqui",
     translate: "no",
@@ -121,8 +122,29 @@ export class EditPatientComponent implements OnInit, OnDestroy {
    // Get client
 
    let patient = this.patientsService.getPatient(this.id);
-   if (patient)this.patient = patient;
-   else{
+   if (patient){
+
+   this.patient = patient;
+
+   this.hospitals = this.hospitalsService.Hospitals;
+   if (this.hospitals.length > 0)
+     this.hospital = this.searchById(this.hospitals, this.patient.hospitalId);
+   else this.hospitalsService.getHospitalsServer();
+
+   this.accommodations = this.accommodationsService.Accommodations;
+   if (this.accommodations.length > 0)
+     this.accommodation = this.searchById(
+       this.accommodations,
+       this.patient.accommodationId
+     );
+   else this.accommodationsService.getAccommodationsServer();
+
+   this.congregations = this.congregationsService.Congregations;
+   if (this.congregations.length > 0)
+     this.congregation = this.searchCongregation();
+   else this.congregationsService.getCongregationsServer();
+
+     }else{
      this.patientsService.getOnePatientServer(this.id);
    }
 
@@ -134,10 +156,6 @@ export class EditPatientComponent implements OnInit, OnDestroy {
      this.congregationsService.getCongregationsServer();
    })
 
-   this.congregations = this.congregationsService.Congregations;
-
-   if (this.congregations.length > 0)
-     this.congregation = this.searchCongregation();
 
 
    this.congregationsSub = this.congregationsService
@@ -149,26 +167,16 @@ export class EditPatientComponent implements OnInit, OnDestroy {
 
 
       //get Hospital
- this.hospitals = this.hospitalsService.Hospitals;
- if (this.hospitals.length > 0)
- this.hospital = this.searchById(this.hospitals, this.patient.hospital);
 
 
  this.hospitalsSub = this.hospitalsService
    .getHospitalsUpdateListener()
    .subscribe(hospitalsData => {
      this.hospitals = hospitalsData;
-     this.hospital = this.searchById(this.hospitals, this.patient.hospital);
+     this.hospital = this.searchById(this.hospitals, this.patient.hospitalId);
    });
 
  //get Accommodation
- this.accommodations = this.accommodationsService.Accommodations;
- if (this.accommodations.length > 0)
-   this.accommodation = this.searchById(
-     this.accommodations,
-     this.patient.accommodation
-   );
-
 
  this.accommodationsSub = this.accommodationsService
    .getAccommodationsUpdateListener()
@@ -176,7 +184,7 @@ export class EditPatientComponent implements OnInit, OnDestroy {
      this.accommodations = accommodationsData;
      this.accommodation = this.searchById(
        this.accommodations,
-       this.patient.accommodation
+       this.patient.accommodationId
      );
    });
   }
@@ -197,10 +205,10 @@ export class EditPatientComponent implements OnInit, OnDestroy {
       value.congregation = this.congregation.name;
 
       if(this.accommodation)
-      value.accommodation = this.accommodation.id;
-      else value.accommodation = null;
+      value.accommodationId = this.accommodation.id;
+      else value.accommodationId = null;
 
-      value.hospital = this.hospital.id;
+      value.hospitalId = this.hospital.id;
       value.id = this.id;
       this.patientsService.updatePatient(this.id, value);
 

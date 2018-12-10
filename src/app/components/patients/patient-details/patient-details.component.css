@@ -1,5 +1,5 @@
 .list-group-item {
-	font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif;
+  font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif;
 }
 
 .Topic{
@@ -13,3 +13,8 @@
 .sameLine{
 display:inline-block;
 }
+
+span{
+  color: green
+}
+

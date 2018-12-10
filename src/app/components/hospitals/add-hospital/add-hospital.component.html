@@ -166,13 +166,8 @@
       <hr>
       <div class="row">
         <ul class="list-group">
-         <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ hospital.state }}</li>
-         <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ hospital.city }}</li>
-         <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ hospital.neighborhood }}</li>
-         <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ hospital.address }}</li>
-         <li class="list-group-item"><strong class="Topic">Número:</strong> {{ hospital.numeral }}</li>
-         <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ hospital.complement }}</li>
-          <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ hospital.cep }}</li>
+            <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ hospital.address }}, {{ hospital.numeral }}
+              {{ hospital.complement }} - {{ hospital.neighborhood }} - {{ hospital.city }} - {{ hospital.state }}</li>
         </ul>
     </div>
     </div>

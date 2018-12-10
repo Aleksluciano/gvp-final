@@ -14,6 +14,7 @@ import { ReportDetailsComponent } from './report-details/report-details.componen
 import { FilterModule } from './../../pipes/filter.module';
 import { ReportsRoutingModule } from './reports-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { MatProgressSpinnerModule } from '@angular/material';
 
 
 
@@ -34,7 +35,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     RouterModule,
     FilterModule,
     HttpClientModule,
-    AngularEditorModule
+    AngularEditorModule,
+    MatProgressSpinnerModule,
   ]
 })
 export class ReportsModule { }

@@ -89,11 +89,12 @@ export class AddPatientComponent implements OnInit, OnDestroy {
     phoneElder1:  "",
     phoneElder2:  "",
     caseDescription: "",
-    hospital: "",
+    hospitalId: "",
     hospitalizationDate: null,
     medicalRelease: null,
-    accommodation: "",
+    accommodationId: "",
     infoWho: "Gvp",
+    report: null
   };
 
 
@@ -190,10 +191,10 @@ this.hospitalsSub = this.hospitalsService
       value.congregation = this.congregation.name;
 
       if(this.accommodation)
-      value.accommodation = this.accommodation.id;
-      else value.accommodation = null;
+      value.accommodationId = this.accommodation.id;
+      else value.accommodationId = null;
 
-      value.hospital = this.hospital.id;
+      value.hospitalId = this.hospital.id;
 
       this.patientsService.createPatient(value);
       this.hasError = false;
@@ -226,34 +227,6 @@ this.hospitalsSub = this.hospitalsService
   resetForm(){
     window.scrollTo(0, 0);
     this.form.resetForm();
-
-    //Reset form and focus
-    this.form.setValue({
-      firstName: "",
-      lastName: "",
-      email: "",
-      mobilePhone: "",
-      phone: "",
-      cep: "",
-      state: "",
-      city: "",
-      neighborhood: "",
-      address: "",
-      numeral: null,
-      complement: "",
-      congregation: "",
-      mobileElder1: "",
-      mobileElder2: "",
-      phoneElder1:  "",
-      phoneElder2:  "",
-      caseDescription: "",
-      hospital: "",
-      hospitalizationDate: null,
-      medicalRelease: null,
-      accommodation: "",
-      infoWho: "Gvp",
-
-    })
 
 
   }

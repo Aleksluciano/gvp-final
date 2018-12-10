@@ -85,8 +85,9 @@ export class AddUserComponent implements OnInit, OnDestroy {
 
 
   this.congregations = this.congregationsService.Congregations;
+  if (this.congregations.length <= 0)
+  this.congregationsService.getCongregationsServer();
 
-    if (this.congregations.length <= 0)this.congregationsService.getCongregationsServer();
 
     this.congregationsSub = this.congregationsService
       .getCongregationsUpdateListener()

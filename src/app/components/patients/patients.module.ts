@@ -15,7 +15,7 @@ import { PatientDetailsComponent } from './patient-details/patient-details.compo
 import { FilterModule } from './../../pipes/filter.module';
 import { PatientsRoutingModule } from './patients-routing.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MatProgressSpinnerModule } from '@angular/material';
+import { MatProgressSpinnerModule, MatExpansionPanel, MatExpansionModule } from '@angular/material';
 import { NgxMaskModule } from 'ngx-mask';
 
 
@@ -39,7 +39,8 @@ import { NgxMaskModule } from 'ngx-mask';
     HttpClientModule,
     AngularEditorModule,
     MatProgressSpinnerModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    MatExpansionModule
   ]
 })
 export class PatientsModule { }

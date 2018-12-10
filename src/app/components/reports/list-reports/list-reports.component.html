@@ -1,3 +1,79 @@
-<p>
-  list-reports works!
-</p>
+<div *ngIf="!isLoaded">
+    <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="isLoaded">
+<div class="row">
+    <div class="col-md-10">
+      <h2><i class="fa fa-file"></i> Relatórios</h2>
+    </div>
+    <div class="col-md-2">
+      <h5 class="text-right text-secondary">Total: {{ reports?.length }}</h5>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-10">
+      <div @fade>
+        <!-- <label for="filter" ><strong>Filtro</strong></label> -->
+        <div class="row">
+        <div class="col-md-3">
+        <input type="text" class="form-control" name="filteredPatient" [ngModel]="filteredPatient | titlecase" (ngModelChange)="filteredPatient = $event"
+          placeholder="Filtrar por paciente">
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" name="filteredMember" [ngModel]="filteredMember | titlecase" (ngModelChange)="filteredMember = $event"
+          placeholder="Filtrar por gvp">
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="col-md-2 mt-1">
+        <a routerLink="add" class="btn btn-success btn-block">
+          <i class="fa fa-plus"> Novo</i>
+        </a>
+      </div>
+  </div>
+
+  <div class="row" @fade>
+      <div class="col-md-10">
+      <table *ngIf="(reports?.length > 0 && isLoaded == true);else noReports" class="table" id="reportTable">
+        <thead class="thead">
+          <tr>
+            <th > Cód.</th>
+            <th > Paciente</th>
+            <th class="colhide"> Data</th>
+            <th class="colhide"> GVP 1</th>
+            <th class="colhide"> GVP 2</th>
+            <th  colspan="3" id="actions">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor="let report of  reports | filter: filteredPatient : 'patientName' | filter: filteredMember : 'gvpName1' || 'gvpName2'">
+            <td ><a routerLink="{{ report.id }}">P{{ report.code }}</a></td>
+            <td ><a routerLink="/patients/{{ report.patientId }}">{{  report.patientName }}</a></td>
+            <td class="colhide">{{ report.visitDate | date:'dd-MM-yyyy'}}</td>
+            <td class="colhide"><a routerLink="/users/{{ report.gvpId1 }}">{{ report.gvpName1 }}</a></td>
+            <td class="colhide"><a routerLink="/users/{{ report.gvpId2 }}">{{ report.gvpName2 }}</a></td>
+          <td ><button id="eyeButton" routerLink="{{ report.id }}"><i class="fa fa-eye" aria-hidden="true"></i></button></td>
+          <td ><button id="editButton" routerLink="edit/{{ report.id }}"><i class="fa fa-edit" aria-hidden="true"></i></button></td>
+          <td ><button id="deleteButton" (click)="onDeleteClick(report.id, report.patientId)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        </td>
+
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+
+
+</div>
+
+<ng-template #noReports>
+  <hr>
+  <h5>Não existem relatórios cadastrados no sistema</h5>
+</ng-template>
+</div>
+

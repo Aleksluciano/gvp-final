@@ -20,11 +20,12 @@ const patientSchema = mongoose.Schema({
    phoneElder1: { type: String },
    phoneElder2: { type: String },
    caseDescription: { type: String},
-   hospital: { type: mongoose.Schema.Types.ObjectId, ref: "Hospital", required: true },
+   hospitalId: { type: mongoose.Schema.Types.ObjectId, ref: "Hospital", required: true },
    hospitalizationDate: { type: Date, required: true},
    medicalRelease: { type: Date},
-   accommodation: { type: mongoose.Schema.Types.ObjectId, ref: "Accommodation"},
-   infoWho: { type: String}
+   accommodationId: { type: mongoose.Schema.Types.ObjectId, ref: "Accommodation"},
+   infoWho: { type: String},
+   report: [{type: mongoose.Schema.Types.ObjectId, ref: "Report"}]
 });
 
 patientSchema.index({ firstName: 1, lastName: 1}, { unique: true });

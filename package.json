@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "startserver": "nodemon backend/server.js"
+    "back": "nodemon backend/server.js",
+    "bprod": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.3.1",
     "mongoose": "^5.3.9",
+    "mongoose-sequence": "^4.0.1",
     "mongoose-unique-validator": "^2.0.2",
     "ngx-mask": "^7.0.1",
     "ngx-mask-input": "^0.1.7",

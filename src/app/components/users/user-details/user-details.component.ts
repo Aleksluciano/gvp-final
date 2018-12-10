@@ -52,7 +52,8 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
         this.usersService.getOneUserServer(this.id);
       }
 
-      this.userSub = this.usersService.getOneUserUpdateListener().subscribe((user) => this.user = user)
+      this.userSub = this.usersService.getOneUserUpdateListener()
+      .subscribe((user) => this.user = user)
 
       //When delete return to list screen
       this.usersSub = this.usersService

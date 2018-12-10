@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { UsersService } from '../users/users.service';
 import { PatientsService } from '../patients/patients.service';
+import { ReportsService } from '../reports/reports.service';
 
 @Component({
   selector: 'app-begin',
@@ -31,22 +32,20 @@ export class BeginComponent implements OnInit {
   constructor(
     private beginService: BeginService,
     private usersService: UsersService,
-    private patientsService: PatientsService
+    private patientsService: PatientsService,
+    private reportsService: ReportsService,
     ) { }
 
   ngOnInit() {
     this.totalObjects = this.beginService.TotalObjects;
 
-    if(this.usersService.Users.length > 0 ){
+
       this.totalObjects.countUser = this.usersService.Users.length;
-    }
+      this.totalObjects.countPatient = this.patientsService.Patients.length;
+      this.totalObjects.countReport = this.reportsService.Reports.length;
 
-    if(this.patientsService.Patients.length > 0 ){
-    this.totalObjects.countPatient = this.patientsService.Patients.length;
-    }
-
-
-    if (this.totalObjects.countPatient <= 0 || this.totalObjects.countUser <= 0) {
+    if (this.totalObjects.countPatient <= 0 || this.totalObjects.countUser <= 0
+      || this.totalObjects.countReport <= 0) {
       this.beginService.countObjectsServer();
     }else this.isLoaded = true;
 

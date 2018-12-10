@@ -18,10 +18,11 @@ export interface Patient{
   phoneElder1: string;
   phoneElder2: string;
   caseDescription: string;
-  hospital: string;
+  hospitalId: string;
   hospitalizationDate: Date;
   medicalRelease: Date;
-  accommodation: string;
+  accommodationId: string;
   infoWho: string;
+  report?: any;
 
 }

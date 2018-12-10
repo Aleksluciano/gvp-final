@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
+import { Location } from "@angular/common";
 
 import { Subject } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -25,7 +26,9 @@ export class PatientsService {
 
   constructor(
     private _flashMessagesService: FlashMessagesService,
-    private http: HttpClient, private router: Router) { }
+    private http: HttpClient, private router: Router,
+    private location: Location
+    ) { }
 
   createPatient(patient: Patient) {
 
@@ -55,10 +58,10 @@ export class PatientsService {
           phoneElder1:  responseData.patient.phoneElder1,
           phoneElder2:  responseData.patient.phoneElder2,
           caseDescription: responseData.patient.caseDescription,
-          hospital: responseData.patient.hospital,
+          hospitalId: responseData.patient.hospitalId,
           hospitalizationDate: responseData.patient.hospitalizationDate,
           medicalRelease: responseData.patient.medicalRelease,
-          accommodation: responseData.patient.accommodation,
+          accommodationId: responseData.patient.accommodationId,
           infoWho: responseData.patient.infoWho
         }
           )
@@ -106,11 +109,12 @@ export class PatientsService {
                 phoneElder1:  patient.phoneElder1,
                 phoneElder2:  patient.phoneElder2,
                 caseDescription: patient.caseDescription,
-                hospital: patient.hospital,
+                hospitalId: patient.hospitalId,
                 hospitalizationDate: patient.hospitalizationDate,
                 medicalRelease: patient.medicalRelease,
-                accommodation: patient.accommodation,
-                infoWho: patient.infoWho
+                accommodationId: patient.accommodationId,
+                infoWho: patient.infoWho,
+                report: patient.report
               }
             )
           }
@@ -158,11 +162,12 @@ export class PatientsService {
                 phoneElder1:  responseData.patient.phoneElder1,
                 phoneElder2:  responseData.patient.phoneElder2,
                 caseDescription: responseData.patient.caseDescription,
-                hospital: responseData.patient.hospital,
+                hospitalId: responseData.patient.hospitalId,
                 hospitalizationDate: responseData.patient.hospitalizationDate,
                 medicalRelease: responseData.patient.medicalRelease,
-                accommodation: responseData.patient.accommodation,
-                infoWho: responseData.patient.infoWho
+                accommodationId: responseData.patient.accommodationId,
+                infoWho: responseData.patient.infoWho,
+                report: responseData.patient.report
               }
           }
         )
@@ -217,7 +222,8 @@ export class PatientsService {
         cssClass: "alert-success",
         timeout: 4000
       });
-      this.router.navigate(['/patients']);
+      this.location.back();
+     //this.router.navigate(['/patients']);
     // this.warnFlashMessage.next();
   });
 }

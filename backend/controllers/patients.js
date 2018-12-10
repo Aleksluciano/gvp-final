@@ -22,10 +22,10 @@ exports.createPatient = async (req, res, next) => {
     phoneElder1: req.body.phoneElder1,
     phoneElder2: req.body.phoneElder2,
     caseDescription: req.body.caseDescription,
-    hospital: req.body.hospital,
+    hospitalId: req.body.hospitalId,
     hospitalizationDate: req.body.hospitalizationDate,
     medicalRelease: req.body.medicalRelease,
-    accommodation: req.body.accommodation,
+    accommodationId: req.body.accommodationId,
     infoWho: req.body.infoWho
 
   });
@@ -64,10 +64,10 @@ exports.updatePatient = async (req, res, next) => {
     phoneElder1: req.body.phoneElder1,
     phoneElder2: req.body.phoneElder2,
     caseDescription: req.body.caseDescription,
-    hospital: req.body.hospital,
+    hospitalId: req.body.hospitalId,
     hospitalizationDate: req.body.hospitalizationDate,
     medicalRelease: req.body.medicalRelease,
-    accommodation: req.body.accommodation,
+    accommodationId: req.body.accommodationId,
     infoWho: req.body.infoWho
   });
 
@@ -91,8 +91,10 @@ exports.updatePatient = async (req, res, next) => {
 
 exports.getPatients = async (req, res, next) => {
 
-  const fetchedPatients = await Patient.find();
-                                      //  .populate('hospital')
+  const fetchedPatients = await Patient.find()
+                                       .populate('report')
+                                       .exec();
+                                       //  .populate('hospital')
                                       //  .populate('accommodation')
                                       //  .exec();
 
@@ -107,8 +109,11 @@ exports.getPatients = async (req, res, next) => {
 
 exports.getOnePatient = async (req, res, next) => {
 
-  const fetchedPatient = await Patient.findById({_id: req.params.id});
+  const fetchedPatient = await Patient.findById({_id: req.params.id})
+                                       .populate('report')
+                                       .exec();
 
+                                       console.log(fetchedPatient.report);
   res.status(200).json({
     message: "Patient fetched successfully!",
     patient: fetchedPatient

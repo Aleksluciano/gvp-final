@@ -15,11 +15,11 @@
 </div>
 <hr>
 <div *ngIf="patient" class="card" @fade>
-  <h3 class="card-header">Paciente: {{ patient.firstName }} {{ patient.lastName }}</h3>
+  <h4 class="card-header">Paciente: {{ patient.firstName }} {{ patient.lastName }}</h4>
   <div class="card-body">
     <div class="row">
       <div class="col-md-12 col-sm-6">
-        <h4> ID: {{ patient.id }}</h4>
+        <h5> ID: {{ patient.id }}</h5>
       </div>
     </div>
     <hr>
@@ -53,9 +53,12 @@
             <div *ngIf="showDetailsAccommodation">{{ accommodation?.name }}( - )</div>
           <div *ngIf="!showDetailsAccommodation">{{ accommodation?.name }}(+)</div>
         </a></div>
+        <div *ngIf="showDetailsAccommodation"> Responsável: {{ accommodation.responsable }}</div>
               <div *ngIf="showDetailsAccommodation"> Endereço: {{ accommodation.address }}, {{ accommodation.numeral }}
                 {{ accommodation.complement }} - {{ accommodation.neighborhood }} - {{ accommodation.city }} - {{ accommodation.state }}
               </div>
+              <div *ngIf="showDetailsAccommodation"> Celular: <a class="linkClass" href="tel:{{ accommodation.mobilePhone }}">{{ accommodation.mobilePhone }}</a></div>
+              <div *ngIf="showDetailsAccommodation"> Telefone: <a class="linkClass" href="tel:{{ accommodation.mobilePhone }}">{{ accommodation.phone }}</a></div>
             </li>
         <li class="list-group-item"><strong class="Topic">Celular Ancião 1:</strong><a class="linkClass" href="tel:{{ patient.mobileElder1 }}"> {{ patient.mobileElder1 | mask:"(00) 00000-0000" }}</a></li>
         <li class="list-group-item"><strong class="Topic">Celular Ancião 2:</strong><a class="linkClass" href="tel:{{ patient.mobileElder2 }}"> {{ patient.mobileElder2 | mask:"(00) 00000-0000" }}</a></li>
@@ -64,14 +67,6 @@
     <ul class="list-group col-md-4">
       <li class="list-group-item"><strong class="Topic">Telefone Ancião 2:</strong><a class="linkClass" href="tel:{{ patient.phoneElder2 }}"> {{ patient.phoneElder2  | mask:"(00) 0000-0000"}}</a></li>
     </ul>
-      <!-- <ul class="list-group col-md-4">
-        <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ patient.neighborhood }}</li>
-        <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ patient.address }}</li>
-        <li class="list-group-item"><strong class="Topic">Número:</strong> {{ patient.numeral }}</li>
-        <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ patient.complement }}</li>
-        <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ patient.cep }}</li>
-      </ul> -->
-
     </div>
   </div>
 </div>
@@ -88,3 +83,30 @@
     </div>
   </div>
 </div>
+<div *ngIf="patient" class="card" @fade>
+    <h4 class="card-header">Relatórios de visita</h4>
+
+<div *ngFor="let report of patient.report; let i = index">
+          <mat-expansion-panel  (opened)="panelOpenState = true"
+                                                                                    (closed)="panelOpenState = false">
+          <br>
+          <mat-expansion-panel-header [collapsedHeight]="'110px'" [expandedHeight]="'110px'">
+          <mat-panel-title>
+          <h6 >Código do relatório:<span> P{{ report.code }}</span> Data da visita: <span>{{ report.visitDate | date:'dd-MM-yyyy'}}</span>
+            Membros Gvp: <span>{{ report.gvpName1 }}</span> e <span>{{ report.gvpName2 }}</span></h6>
+          </mat-panel-title>
+          <mat-panel-description>
+
+          </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <angular-editor name="description" [(ngModel)]="report.description" [config]="config"></angular-editor>
+          </mat-expansion-panel>
+
+        </div>
+
+  </div>
+
+
+
+

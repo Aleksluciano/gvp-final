@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
+import { Location } from "@angular/common";
 
 import { Subject } from 'rxjs';
 import { map } from "rxjs/operators";
@@ -25,7 +26,9 @@ export class ReportsService {
 
   constructor(
     private _flashMessagesService: FlashMessagesService,
-    private http: HttpClient, private router: Router) { }
+    private http: HttpClient, private router: Router,
+    private location: Location
+    ) { }
 
   createReport(report: Report) {
 
@@ -39,11 +42,15 @@ export class ReportsService {
           id: responseData.report._id,
           typeReport: responseData.report.typeReport,
           patientId: responseData.report.patientId,
+          patientName: responseData.report.patientName,
           assitantId: responseData.report.assistantId,
           visitDate: responseData.report.visitDate,
           gvpId1: responseData.report.gvpId1,
+          gvpName1: responseData.report.gvpName1,
           gvpId2: responseData.report.gvpId2,
-          description: responseData.report.description
+          gvpName2: responseData.report.gvpName2,
+          description: responseData.report.description,
+          code: responseData.report.code
         }
           )
 
@@ -51,10 +58,11 @@ export class ReportsService {
       .subscribe((newReport) => {
 
          this.reports.unshift(newReport);
-         this._flashMessagesService.show('Novo paciente adicionado', {
+         this._flashMessagesService.show('Novo relatório adicionado', {
           cssClass: 'alert-success', timeout: 4000
         });
         this.reportsUpdated.next([...this.reports]);
+        this.router.navigate(['/reports']);
 
       });
   }
@@ -73,11 +81,15 @@ export class ReportsService {
                 id: report._id,
                 typeReport: report.typeReport,
                 patientId: report.patientId,
+                patientName: report.patientName,
                 assitantId: report.assistantId,
                 visitDate: report.visitDate,
                 gvpId1: report.gvpId1,
+                gvpName1: report.gvpName1,
                 gvpId2: report.gvpId2,
-                description: report.description
+                gvpName2: report.gvpName2,
+                description: report.description,
+                code: report.code
               }
             )
           }
@@ -104,11 +116,15 @@ export class ReportsService {
             id: responseData.report._id,
             typeReport: responseData.report.typeReport,
             patientId: responseData.report.patientId,
+            patientName: responseData.report.patientName,
             assitantId: responseData.report.assistantId,
             visitDate: responseData.report.visitDate,
             gvpId1: responseData.report.gvpId1,
+            gvpName1: responseData.report.gvpName1,
             gvpId2: responseData.report.gvpId2,
-            description: responseData.report.description
+            gvpName2: responseData.report.gvpName2,
+            description: responseData.report.description,
+            code: responseData.report.code
               }
           }
         )
@@ -132,12 +148,12 @@ export class ReportsService {
   }
 
 
-  deleteReport(id: string) {
-    return this.http.delete(BACKEND_URL + id).subscribe(() =>{
+  deleteReport(id: string, patientId: string) {
+    return this.http.delete(BACKEND_URL + id + '?patientId=' + patientId).subscribe(() =>{
       this.reports.forEach((u, index) => {
         if(u.id == id) this.reports.splice(index, 1);
       });
-      this._flashMessagesService.show('Paciente removido', {
+      this._flashMessagesService.show('relatório removido', {
         cssClass: 'alert-success', timeout: 4000
       });
       this.reportsUpdated.next([...this.reports]);
@@ -158,11 +174,12 @@ export class ReportsService {
        if(u.id == id) u = report;
        return u;
     });
-  this._flashMessagesService.show("Paciente atualizado", {
+  this._flashMessagesService.show("relatório atualizado", {
         cssClass: "alert-success",
         timeout: 4000
       });
-      this.router.navigate(['/reports']);
+    //this.location.back();
+    this.router.navigate(['reports']);
     // this.warnFlashMessage.next();
   });
 }

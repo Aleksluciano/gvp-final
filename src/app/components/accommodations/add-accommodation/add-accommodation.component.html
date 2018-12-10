@@ -235,18 +235,11 @@
     <hr>
     <div class="row">
       <ul class="list-group col-md-6">
-       <li class="list-group-item"><strong class="Topic">Estado:</strong> {{ accommodation.state }}</li>
-       <li class="list-group-item"><strong class="Topic">Cidade:</strong> {{ accommodation.city }}</li>
-       <li class="list-group-item"><strong class="Topic">Bairro:</strong> {{ accommodation.neighborhood }}</li>
-       <li class="list-group-item"><strong class="Topic">Logradouro:</strong> {{ accommodation.address }}</li>
-       <li class="list-group-item"><strong class="Topic">Número:</strong> {{ accommodation.numeral }}</li>
-       <li class="list-group-item"><strong class="Topic">Complemento:</strong> {{ accommodation.complement }}</li>
-        <li class="list-group-item"><strong class="Topic">Cep:</strong> {{ accommodation.cep }}</li>
-      </ul>
-      <ul class="list-group col-md-6">
+          <li class="list-group-item"><strong class="Topic">Endereço:</strong> {{ accommodation.address }}, {{ accommodation.numeral }}
+            {{ accommodation.complement }} - {{ accommodation.neighborhood }} - {{ accommodation.city }} - {{ accommodation.state }}</li>
           <li class="list-group-item"><strong class="Topic">Responsável:</strong> {{ accommodation.responsable }}</li>
-          <li class="list-group-item"><strong class="Topic">Celular:</strong><a href="tel:{{ accommodation.mobilePhone }}"> {{ accommodation.mobilePhone }}</a></li>
-           <li class="list-group-item"><strong class="Topic">Telefone:</strong><a href="tel:{{ accommodation.phone }}"> {{ accommodation.phone }}</a></li>
+          <li class="list-group-item"><strong class="Topic">Celular:</strong><a class="linkClass" href="tel:{{ accommodation.mobilePhone }}"> {{ accommodation.mobilePhone }}</a></li>
+           <li class="list-group-item"><strong class="Topic">Telefone:</strong><a class="linkClass" href="tel:{{ accommodation.phone }}"> {{ accommodation.phone }}</a></li>
          </ul>
   </div>
   </div>

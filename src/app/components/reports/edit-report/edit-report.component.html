@@ -1,3 +1,119 @@
-<p>
-  edit-report works!
-</p>
+<div class="row">
+    <div class="col-md-6">
+      <a [routerLink]="" (click)=onBackClicked() class="btn btn-link">
+        <i class="fa fa-arrow-circle-o-left"></i> Voltar
+      </a>
+    </div>
+  </div>
+
+  <div class="card" @fade>
+    <div class="card-header">
+      Atualizar Relatório de visita
+    </div>
+    <div class="card-body">
+        <br>
+        <h6 class="card-subtitle mb-2 text-muted">Dados de visita</h6>
+
+      <form #reportForm="ngForm" (ngSubmit)="onSubmit(reportForm)">
+
+
+        <div class="row">
+
+          <div class="col-md-3">
+              <div class="form-group">
+                <label for="visitDate">Data da visita *</label>
+                <input
+                type="date"
+                class="form-control"
+                name="visitDate"
+                #visitDateModel="ngModel"
+                [ngClass]="{'is-invalid':( visitDateModel?.errors && visitDateModel?.touched ) || ( !report.visitDate && hasError )}"
+                [ngModel]="report.visitDate | date:'yyyy-MM-dd'"
+                (ngModelChange)="report.visitDate = $event"
+                required
+                >
+
+                <div [hidden]="!visitDateModel.errors?.required" class="invalid-feedback">
+                    Campo obrigatório
+                  </div>
+
+              </div>
+            </div>
+
+            <div class="form-group" class="col-md-4" >
+
+                <label for="gvp">Membro GVP 1 *</label>
+                <select #gvp1Model="ngModel" type="text" [(ngModel)]="gvp1" class="form-control" name="gvp1"
+                  [ngClass]="{'is-invalid':( gvp1Model?.errors && gvp1Model?.touched ) || ( gvp1Model?.errors && hasError )}"
+                  required>
+                  <option> </option>
+                  <option *ngFor="let gvp of gvps1" [ngValue]="gvp">{{ gvp?.firstName }} {{ gvp?.lastName }}</option>
+                </select>
+
+                <div [hidden]="!gvp1Model.errors?.required" class="invalid-feedback">
+                  Campo obrigatório
+                </div>
+
+              </div>
+
+              <div class="form-group" class="col-md-4" >
+
+                  <label for="gvp2">Membro GVP 2 *</label>
+                  <select #gvp2Model="ngModel" type="text" [(ngModel)]="gvp2" class="form-control" name="gvp2"
+                    [ngClass]="{'is-invalid':( gvp2Model?.errors && gvp2Model?.touched ) || ( gvp2Model?.errors && hasError )}"
+                    required>
+                    <option> </option>
+                    <option *ngFor="let gvp of gvps2" [ngValue]="gvp">{{ gvp?.firstName }} {{ gvp?.lastName }}</option>
+                  </select>
+
+                  <div [hidden]="!gvp2Model.errors?.required" class="invalid-feedback">
+                    Campo obrigatório
+                  </div>
+
+                </div>
+
+                <div class="form-group" class="col-md-4" >
+
+                    <label for="patient">Paciente *</label>
+                    <select #patientModel="ngModel" type="text" [(ngModel)]="patient" class="form-control" name="patient"
+                      [ngClass]="{'is-invalid':( patientModel?.errors && patientModel?.touched ) || ( patientModel?.errors && hasError )}"
+                      required>
+                      <option> </option>
+                      <option *ngFor="let pat of patients" [ngValue]="pat">{{ pat?.firstName }} {{ pat?.lastName }}</option>
+                    </select>
+
+                    <div [hidden]="!patientModel.errors?.required" class="invalid-feedback">
+                      Campo obrigatório
+                    </div>
+
+                  </div>
+
+        </div>
+
+<div class="row">
+  <div class="col-md-3">
+    <br><br>
+    <h6 class="card-subtitle mb-2 text-muted">Descrição da visita</h6>
+
+  </div>
+  </div>
+
+  <div class="container" id="divEditor">
+  <br>
+  <angular-editor
+  id="myEditor" name="description"  [(ngModel)]="report.description"   [config]="config"></angular-editor>
+  <br>
+  </div>
+
+
+
+<br><br>
+
+        <input type="submit" value="Salvar" class="btn btn-primary btn-block">
+
+      </form>
+
+    </div>
+  </div>
+
+
