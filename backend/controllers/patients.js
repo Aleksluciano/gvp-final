@@ -92,11 +92,9 @@ exports.updatePatient = async (req, res, next) => {
 exports.getPatients = async (req, res, next) => {
 
   const fetchedPatients = await Patient.find()
-                                       .populate('report')
+                                       .populate({ path: 'report', options: { sort: { "code": "descending"}}})
                                        .exec();
-                                       //  .populate('hospital')
-                                      //  .populate('accommodation')
-                                      //  .exec();
+                                   
 
   res.status(200).json({
     message: "Patients fetched successfully!",
@@ -110,7 +108,7 @@ exports.getPatients = async (req, res, next) => {
 exports.getOnePatient = async (req, res, next) => {
 
   const fetchedPatient = await Patient.findById({_id: req.params.id})
-                                       .populate('report')
+                                       .populate({ path: 'report', options: { sort: { "code": "descending"}}})
                                        .exec();
 
                                        console.log(fetchedPatient.report);

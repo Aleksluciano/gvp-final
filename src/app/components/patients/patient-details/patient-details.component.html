@@ -99,7 +99,8 @@
 
           </mat-panel-description>
           </mat-expansion-panel-header>
-
+          <button id="eyeButton" routerLink="/reports/{{ report._id }}"><i class="fa fa-eye" aria-hidden="true"></i></button>
+          <button id="editButton" routerLink="/reports/edit/{{ report._id }}"><i class="fa fa-edit" aria-hidden="true"></i></button>
           <angular-editor name="description" [(ngModel)]="report.description" [config]="config"></angular-editor>
           </mat-expansion-panel>
 

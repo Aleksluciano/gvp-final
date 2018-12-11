@@ -79,3 +79,8 @@ label {
   .linkClass{
     color: black;
   }
+
+  p{
+    font-size: 12px;
+    float: right;
+  }

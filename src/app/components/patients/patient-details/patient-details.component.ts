@@ -170,12 +170,10 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
   }
 
   updateDataFromReport(){
-    let report;
-    console.log("array reports",this.reportsService.Reports.length)
-    console.log("array patientreport",this.patient.report.length)
 
-    if(this.reportsService.Reports.length > 0 && this.patient.report){
+    if(this.reportsService.Reports.length > 0 && this.patient){
       let reports = this.reportsService.Reports.filter(r => r.patientId == this.patient.id);
+      if(reports.length > 0){
       this.patient.report = reports.map((r) =>{
         return {
           _id : r.id,
@@ -194,6 +192,7 @@ export class PatientDetailsComponent implements OnInit, OnDestroy {
       })
 
     }
+  }
   }
 
   onDeleteClick() {

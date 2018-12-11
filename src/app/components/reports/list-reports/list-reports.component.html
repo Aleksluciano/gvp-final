@@ -16,13 +16,13 @@
       <div @fade>
         <!-- <label for="filter" ><strong>Filtro</strong></label> -->
         <div class="row">
+      <div class="col-md-3">
+          <input type="text" class="form-control" name="filteredCode" [ngModel]="filteredCode | titlecase" (ngModelChange)="filteredCode = $event"
+          placeholder="Filtrar por código">
+        </div>
         <div class="col-md-3">
         <input type="text" class="form-control" name="filteredPatient" [ngModel]="filteredPatient | titlecase" (ngModelChange)="filteredPatient = $event"
           placeholder="Filtrar por paciente">
-        </div>
-        <div class="col-md-3">
-          <input type="text" class="form-control" name="filteredMember" [ngModel]="filteredMember | titlecase" (ngModelChange)="filteredMember = $event"
-          placeholder="Filtrar por gvp">
         </div>
       </div>
       </div>
@@ -48,7 +48,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor="let report of  reports | filter: filteredPatient : 'patientName' | filter: filteredMember : 'gvpName1' || 'gvpName2'">
+          <tr  *ngFor="let report of  reports | filter: filteredPatient : 'patientName' | filter: filteredCode : 'code'">
             <td ><a routerLink="{{ report.id }}">P{{ report.code }}</a></td>
             <td ><a routerLink="/patients/{{ report.patientId }}">{{  report.patientName }}</a></td>
             <td class="colhide">{{ report.visitDate | date:'dd-MM-yyyy'}}</td>

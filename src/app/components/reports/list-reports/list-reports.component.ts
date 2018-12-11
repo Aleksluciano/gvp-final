@@ -31,7 +31,7 @@ export class ListReportsComponent implements OnInit, OnDestroy {
   reportsSub: Subscription;
   reports: Report[] = [];
   filteredPatient: string = '';
-  filteredMember: string = '';
+  filteredCode: string = '';
 
   isLoaded: boolean = false;
 

@@ -174,7 +174,7 @@ export class ReportsService {
        if(u.id == id) u = report;
        return u;
     });
-  this._flashMessagesService.show("relatório atualizado", {
+  this._flashMessagesService.show("Relatório atualizado", {
         cssClass: "alert-success",
         timeout: 4000
       });

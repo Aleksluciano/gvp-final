@@ -65,7 +65,7 @@ exports.updateReport = async (req, res, next) => {
 exports.getReports = async (req, res, next) => {
 
 
-  const fetchedReports = await Report.find();
+  const fetchedReports = await Report.find().sort({ "code": "descending"}).exec();
 
   res.status(200).json({
     message: "Reports fetched successfully!",

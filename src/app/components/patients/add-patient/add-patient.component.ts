@@ -63,7 +63,17 @@ export class AddPatientComponent implements OnInit, OnDestroy {
 
   hospitals: Hospital[] = [];
   hospitalsSub: Subscription;
-  hospital: Hospital;
+  hospital: Hospital = {
+    id: "",
+    name: "",
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    address: "",
+    numeral: null,
+    complement: ""
+  };
 
   newdate = new Date();
 
@@ -227,7 +237,31 @@ this.hospitalsSub = this.hospitalsService
   resetForm(){
     window.scrollTo(0, 0);
     this.form.resetForm();
-
+    this.form.setValue({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobilePhone: "",
+    phone: "",
+    cep: "",
+    state: "",
+    city: "",
+    neighborhood: "",
+    address: "",
+    numeral: null,
+    complement: "",
+    congregation: "",
+    mobileElder1: "",
+    mobileElder2: "",
+    phoneElder1:  "",
+    phoneElder2:  "",
+    caseDescription: "",
+    hospital: "",
+    hospitalizationDate: null,
+    medicalRelease: null,
+    accommodation: "",
+    infoWho: "Gvp"
+    })
 
   }
 
