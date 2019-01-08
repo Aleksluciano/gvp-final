@@ -37,8 +37,13 @@ export class ReportsService {
         BACKEND_URL,
         report
       ).pipe(
-        map(responseData =>
-          <Report>{
+        map(responseData =>{
+
+          if (responseData.report.typeReport == 'patient')
+          responseData.report.code = 'P' + responseData.report.code;
+          else responseData.report.code = 'A' + responseData.report.code;
+          
+          return<Report>{
           id: responseData.report._id,
           typeReport: responseData.report.typeReport,
           patientId: responseData.report.patientId,
@@ -51,6 +56,7 @@ export class ReportsService {
           gvpName2: responseData.report.gvpName2,
           description: responseData.report.description,
           code: responseData.report.code
+          }
         }
           )
 
@@ -76,8 +82,13 @@ export class ReportsService {
       .pipe(
         map(responseData => {
           return {
-            reports: responseData.reports.map(report =>
-              <Report>{
+            reports: responseData.reports.map(report =>{
+
+              if (report.typeReport == 'patient')
+              report.code = 'P' + report.code;
+              else report.code = 'A' + report.code;
+
+              return <Report>{
                 id: report._id,
                 typeReport: report.typeReport,
                 patientId: report.patientId,
@@ -91,6 +102,7 @@ export class ReportsService {
                 description: report.description,
                 code: report.code
               }
+            }
             )
           }
         })

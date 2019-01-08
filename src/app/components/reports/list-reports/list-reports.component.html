@@ -49,7 +49,7 @@
         </thead>
         <tbody>
           <tr  *ngFor="let report of  reports | filter: filteredPatient : 'patientName' | filter: filteredCode : 'code'">
-            <td ><a routerLink="{{ report.id }}">P{{ report.code }}</a></td>
+            <td ><a routerLink="{{ report.id }}">{{ report.code }}</a></td>
             <td ><a routerLink="/patients/{{ report.patientId }}">{{  report.patientName }}</a></td>
             <td class="colhide">{{ report.visitDate | date:'dd-MM-yyyy'}}</td>
             <td class="colhide"><a routerLink="/users/{{ report.gvpId1 }}">{{ report.gvpName1 }}</a></td>
